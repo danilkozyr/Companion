@@ -21,6 +21,9 @@ struct User {
     let level: String
     let correctionPoints: Int
     let wallet: Int
+    var location: String
     
-    //    var location: String
+    var skills: [Skill]
+    let projects: [Project]
+    
 }

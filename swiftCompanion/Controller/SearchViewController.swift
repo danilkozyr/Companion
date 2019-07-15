@@ -5,6 +5,7 @@
 //  Created by Daniil KOZYR on 7/14/19.
 //  Copyright © 2019 Daniil KOZYR. All rights reserved.
 //
+// "
 
 import UIKit
 
@@ -39,11 +40,50 @@ class SearchViewController: UIViewController {
         authorizeApplication()
     }
     
+    private func downloadProjects(with userId: Int, callBack: @escaping (Bool, [Project]?) -> ()) {
+        var projects: [Project] = []
+        let url = URL(string: "https://api.intra.42.fr/v2/projects_users?user_id=\(userId)&page[size]=100")
+        var request = URLRequest(url: url!)
+        request.httpMethod = "GET"
+        request.addValue("Bearer " + token, forHTTPHeaderField: "Authorization")
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            guard let data = data, error == nil else {
+                return
+            }
+            
+            if let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [NSDictionary] {
+                for item in json {
+                    let cursus_ids = item["cursus_ids"] as? NSArray
+                    if (cursus_ids?.contains(1))! {
+                        let projectDetails = item["project"] as? NSDictionary
+                        let name = projectDetails!["name"] as! String
+                        if name != "Rushes" && projectDetails!["parent_id"] as? NSNull != nil {
+                            let grade = (item["final_mark"] as? NSNumber)?.stringValue
+                            
+                            projects.append(Project(name: name, grade: grade))
+                        }
+                        
+                    }
+                    
+                }
+                callBack(true, projects)
+            } else {
+                print("downloadPorjects() json fail")
+                callBack(false, [])
+
+            }
+            
+        }.resume()
+
+    }
+    
     private func downloadUser(with login: String) {
         let url = URL(string: "https://api.intra.42.fr/v2/users/" + login)
         var request = URLRequest(url: url!)
         request.httpMethod = "GET"
         request.setValue("Bearer " + token, forHTTPHeaderField: "Authorization")
+        
         
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             guard let data = data, error == nil else {
@@ -61,6 +101,7 @@ class SearchViewController: UIViewController {
                     }
                     return
                 }
+                
                 
                 let id = json.value(forKey: "id") as! Int
                 let firstName = json["first_name"] as! String
@@ -85,48 +126,69 @@ class SearchViewController: UIViewController {
                     place = "Unavailable"
                 }
                 
+                let campus = json["campus"] as? [NSDictionary]
+                var location = ""
+                for camp in campus! {
+                    let city = camp["city"] as! String
+                    let country = camp["country"] as! String
+                    location = city + ", " + country
+                }
+
+                
                 let cursus_users = json["cursus_users"] as? [NSDictionary]
                 var level = ""
+                var skills: [Skill] = []
                 for cursus in cursus_users! {
                     if (cursus["cursus_id"] as! Int == 1) {
-                        let skills = cursus["skills"] as? [NSDictionary]
-                        for skill in skills! {
-                            print(skill.value(forKey: "id"))
-
-                            //                            print(skill.value(forKey: <#T##String#>))
+                        let skillsFromJson = cursus["skills"] as? [NSDictionary]
+                        for skill in skillsFromJson! {
+                            let name = skill["name"] as! String
+                            let level = (skill["level"] as! NSNumber).doubleValue.roundDouble
+                            let id = skill["id"] as! NSNumber
+                            skills.append(Skill(id: Int(truncating: id), name: name, level: level))
                         }
-                        print(skills)
-//                        print(cursus)
                         level = (cursus["level"] as! NSNumber).doubleValue.roundDouble
-
                     }
                 }
-
-                self.user = User(id: id,
-                                 login: login,
-                                 firstName: firstName,
-                                 lastName: lastName,
-                                 email: email,
-                                 imageUrl: image_url,
-                                 poolDate: poolDate,
-                                 phone: phone as! String,
-                                 place: place as! String,
-                                 level: level,
-                                 correctionPoints: correction_point,
-                                 wallet: wallet)
                 
-                DispatchQueue.main.async {
-                    self.activityIndicator.isHidden = true
-                    self.activityIndicator.stopAnimating()
-                    self.performSegue(withIdentifier: "fromLoginToProfileSegueIdentifier", sender: nil)
+                if skills.isEmpty {
+                    DispatchQueue.main.sync {
+                        let alert = UIAlertController().returnAlert(title: "Error", message: "User did not pass the pool", action: "OK")
+                        self.present(alert, animated: true)
+                        self.activityIndicator.stopAnimating()
+                        self.activityIndicator.isHidden = true
+                    }
+                    return
                 }
+                
+                self.downloadProjects(with: id) { (true, projects) in
+                    self.user = User(id: id,
+                                     login: login,
+                                     firstName: firstName,
+                                     lastName: lastName,
+                                     email: email,
+                                     imageUrl: image_url,
+                                     poolDate: poolDate,
+                                     phone: phone as! String,
+                                     place: place as! String,
+                                     level: level,
+                                     correctionPoints: correction_point,
+                                     wallet: wallet,
+                                     location: location,
+                                     skills: skills,
+                                     projects: projects!)
+                    DispatchQueue.main.async {
+                        self.activityIndicator.isHidden = true
+                        self.activityIndicator.stopAnimating()
+                        self.performSegue(withIdentifier: "fromLoginToProfileSegueIdentifier", sender: nil)
+                    }
+                }
+                
             } else {
                 print("downloadUser JSON fail")
             }
             
         }.resume()
-
-
     }
     
     
