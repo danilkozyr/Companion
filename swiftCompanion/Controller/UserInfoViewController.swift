@@ -16,7 +16,7 @@ class UserInfoViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var loginLabel: UILabel!
     @IBOutlet weak var location: UILabel!
-    @IBOutlet weak var phoneLabel: UILabel!
+    @IBOutlet weak var phoneTextView: UITextView!
     @IBOutlet weak var wallet: UILabel!
     @IBOutlet weak var correctionLabel: UILabel!
     @IBOutlet weak var poolLabel: UILabel!
@@ -24,6 +24,7 @@ class UserInfoViewController: UIViewController {
     @IBOutlet weak var levelLabel: UILabel!
     @IBOutlet weak var progressBar: UIProgressView!
     @IBOutlet weak var contentView: UIView!
+
     
     @IBOutlet weak var projectTableView: UITableView! {
         didSet {
@@ -53,7 +54,7 @@ class UserInfoViewController: UIViewController {
        
         loginLabel.text = user.login
         location.text = user.location
-        phoneLabel.text = user.phone
+        phoneTextView.text = user.phone
         wallet.text = "Wallet: \(user.wallet)"
         correctionLabel.text = "Corrections: \(user.correctionPoints)"
         poolLabel.text = user.poolDate

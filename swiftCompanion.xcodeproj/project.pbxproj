@@ -21,7 +21,7 @@
 		55E37A4222DCACE400342D9C /* ProjectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E37A4022DCACE400342D9C /* ProjectCell.swift */; };
 		55E37A4322DCACE400342D9C /* ProjectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55E37A4122DCACE400342D9C /* ProjectCell.xib */; };
 		55E37A4522DCB26700342D9C /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E37A4422DCB26700342D9C /* Project.swift */; };
-		55E37A4722DCD19B00342D9C /* APIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E37A4622DCD19B00342D9C /* APIController.swift */; };
+		55E37A4722DCD19B00342D9C /* APIDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E37A4622DCD19B00342D9C /* APIDownloader.swift */; };
 		55E37A4922DCE4F400342D9C /* APIData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E37A4822DCE4F400342D9C /* APIData.swift */; };
 /* End PBXBuildFile section */
 
@@ -42,7 +42,7 @@
 		55E37A4022DCACE400342D9C /* ProjectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectCell.swift; sourceTree = "<group>"; };
 		55E37A4122DCACE400342D9C /* ProjectCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProjectCell.xib; sourceTree = "<group>"; };
 		55E37A4422DCB26700342D9C /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
-		55E37A4622DCD19B00342D9C /* APIController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIController.swift; sourceTree = "<group>"; };
+		55E37A4622DCD19B00342D9C /* APIDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = APIDownloader.swift; path = ../APIDownloader.swift; sourceTree = "<group>"; };
 		55E37A4822DCE4F400342D9C /* APIData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -76,7 +76,6 @@
 		55D87EE022DB3BE70035F60F /* swiftCompanion */ = {
 			isa = PBXGroup;
 			children = (
-				55E37A4622DCD19B00342D9C /* APIController.swift */,
 				55D87F0022DB68D10035F60F /* Extensions */,
 				55D87EF522DB3DF70035F60F /* Controller */,
 				55D87EF622DB3E020035F60F /* Model */,
@@ -118,6 +117,7 @@
 		55D87EF622DB3E020035F60F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				55E37A4622DCD19B00342D9C /* APIDownloader.swift */,
 				55D87EF722DB3E0C0035F60F /* User.swift */,
 				55E37A2E22DC8C9100342D9C /* Skills.swift */,
 				55E37A4422DCB26700342D9C /* Project.swift */,
@@ -238,7 +238,7 @@
 				55E37A2F22DC8C9100342D9C /* Skills.swift in Sources */,
 				55E37A3D22DCA03F00342D9C /* SkillCell.swift in Sources */,
 				55E37A4222DCACE400342D9C /* ProjectCell.swift in Sources */,
-				55E37A4722DCD19B00342D9C /* APIController.swift in Sources */,
+				55E37A4722DCD19B00342D9C /* APIDownloader.swift in Sources */,
 				55E37A4922DCE4F400342D9C /* APIData.swift in Sources */,
 				55D87EE422DB3BE70035F60F /* SearchViewController.swift in Sources */,
 				55D87EFA22DB3E5F0035F60F /* UserInfoViewController.swift in Sources */,

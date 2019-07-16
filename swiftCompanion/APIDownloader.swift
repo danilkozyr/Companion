@@ -1,5 +1,5 @@
 //
-//  APIController.swift
+//  APIDownloader.swift
 //  swiftCompanion
 //
 //  Created by Daniil KOZYR on 7/15/19.
@@ -9,7 +9,7 @@
 import Foundation
 
 
-class APIController {
+class APIDownloader {
 
     func authorizeApplication(failure: @escaping (String) -> Void ) {
         var urlComponents = URLComponents(string: "https://api.intra.42.fr/oauth/token")
@@ -122,9 +122,14 @@ class APIController {
         let correction_point = json.value(forKey: "correction_point") as! Int
         let wallet = json.value(forKey: "wallet") as! Int
 
-        let poolMonth = json["pool_month"] as! String
-        let poolYear = json["pool_year"] as! String
-        let poolDate = poolMonth + " " + poolYear
+        var poolDate: String = ""
+        
+        if let poolMonth = json["pool_month"] as? String, let poolYear = json["pool_year"] as? String {
+            poolDate = poolMonth + " " + poolYear
+        } else {
+            poolDate = "Admin"
+        }
+        
 
         var phone = json["phone"]
         if phone as? String == nil {

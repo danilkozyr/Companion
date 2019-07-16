@@ -11,17 +11,39 @@ import UIKit
 
 class SearchViewController: UIViewController {
 
-    var api = APIController()
+    var api = APIDownloader()
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     @IBOutlet weak var textField: UITextField! {
         didSet {
             textField.delegate = self
         }
     }
-    @IBAction func searchButtonClicked(_ sender: UIButton?) {
+//    @IBAction func searchButtonClicked(_ sender: UIButton?) {
+
+//    }
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        activityIndicator.isHidden = true
+        activityIndicator.stopAnimating()
+        api.authorizeApplication(failure: { (error) in
+            DispatchQueue.main.sync {
+                let alert = UIAlertController().returnAlert(title: "You are not connected to the Internet", message: error, action: "OK")
+                self.present(alert, animated: true)
+            }
+        })
+    }
+}
+
+
+extension SearchViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
         guard APIData.token != "" else {
-            return
+            return false
         }
         activityIndicator.isHidden = false
         activityIndicator.startAnimating()
@@ -43,27 +65,9 @@ class SearchViewController: UIViewController {
                 self.present(alert, animated: true)
             }
         }
-    }
-    
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        activityIndicator.isHidden = true
-        activityIndicator.stopAnimating()
-        api.authorizeApplication(failure: { (error) in
-            DispatchQueue.main.sync {
-                let alert = UIAlertController().returnAlert(title: "You are not connected to the Internet", message: error, action: "OK")
-                self.present(alert, animated: true)
-            }
-        })
-    }
-}
-
-
-extension SearchViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        self.searchButtonClicked(nil)
+        
+        
+//        self.searchButtonClicked(nil)
         return true
     }
 }
