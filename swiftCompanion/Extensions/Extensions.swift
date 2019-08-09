@@ -44,6 +44,19 @@ extension UIAlertController {
 
 }
 
+extension UIView {
+    func setGradientColor(colorOne: UIColor, colorTwo: UIColor) {
+        let gradient = CAGradientLayer()
+        
+        gradient.frame = bounds
+        gradient.colors = [colorOne.cgColor, colorTwo.cgColor]
+        gradient.startPoint = CGPoint(x: 0.0, y: 0.0)
+        gradient.endPoint = CGPoint(x: 0.0, y: 1.0)
+        
+        layer.insertSublayer(gradient, at: 0)
+    }
+}
+
 extension Double {
     var roundDouble:String {
         return String(format: "%.2f", self)

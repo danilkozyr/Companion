@@ -79,6 +79,10 @@ class UserInfoViewController: UIViewController {
         guard let user = user else {
             return
         }
+        scrollView.setGradientColor(colorOne: UIColor(red: 4/255, green: 4/255, blue: 9/255, alpha: 1.0),
+                                    colorTwo: UIColor(red: 48/255, green: 43/255, blue: 99/255, alpha: 1.0))
+        view.setGradientColor(colorOne: UIColor(red: 4/255, green: 4/255, blue: 9/255, alpha: 1.0),
+                              colorTwo: UIColor(red: 48/255, green: 43/255, blue: 99/255, alpha: 1.0))
         connectOutlets(with: user)
         designImprovements(with: user)
     }

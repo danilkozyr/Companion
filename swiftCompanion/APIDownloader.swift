@@ -23,14 +23,12 @@ class APIDownloader {
 
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             guard let data = data, error == nil else {
-                print("authorizeApplication Error")
                 failure("Settings -> Companion -> Use Cellular Data or connect to wifi and reload the app.")
                 return
             }
 
             guard let json = try? JSONSerialization.jsonObject(with: data, options: []) as? NSDictionary else {
                 failure("Settings -> Companion -> Use Cellular Data or connect to wifi and reload the app.")
-                print("authorizeApplication JSON fail")
                 return
             }
             
@@ -95,6 +93,7 @@ class APIDownloader {
                     if (cursus_ids?.contains(1))! {
                         let projectDetails = item["project"] as? NSDictionary
                         let name = projectDetails!["name"] as! String
+
                         if name != "Rushes" && projectDetails!["parent_id"] as? NSNull != nil {
                             let grade = (item["final_mark"] as? NSNumber)?.stringValue
 
@@ -167,7 +166,6 @@ class APIDownloader {
         }
 
         if skills.isEmpty {
-            print("User did not pass the pool")
             return nil
         }
         

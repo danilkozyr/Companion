@@ -11,7 +11,7 @@ import UIKit
 
 class SearchViewController: UIViewController {
 
-    var api = APIDownloader()
+    private var api = APIDownloader()
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
@@ -20,15 +20,14 @@ class SearchViewController: UIViewController {
             textField.delegate = self
         }
     }
-//    @IBAction func searchButtonClicked(_ sender: UIButton?) {
-
-//    }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.setGradientColor(colorOne: UIColor(red: 4/255, green: 4/255, blue: 9/255, alpha: 1.0),
+                              colorTwo: UIColor(red: 48/255, green: 43/255, blue: 99/255, alpha: 1.0))
         activityIndicator.isHidden = true
         activityIndicator.stopAnimating()
+
         api.authorizeApplication(failure: { (error) in
             DispatchQueue.main.sync {
                 let alert = UIAlertController().returnAlert(title: "You are not connected to the Internet", message: error, action: "OK")
@@ -42,17 +41,22 @@ class SearchViewController: UIViewController {
 extension SearchViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        
         guard APIData.token != "" else {
             return false
         }
+        
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         activityIndicator.isHidden = false
         activityIndicator.startAnimating()
+        
         var login = textField.text?.replacingOccurrences(of: " ", with: "")
         login = login?.lowercased()
         api.downloadUser(with: login!, success: { (user) in
             DispatchQueue.main.sync {
                 self.activityIndicator.stopAnimating()
                 self.activityIndicator.isHidden = true
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
                 let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "UserInfoViewControllerID") as! UserInfoViewController
                 nextVC.user = user
                 self.navigationController?.pushViewController(nextVC, animated: true)
@@ -62,6 +66,7 @@ extension SearchViewController: UITextFieldDelegate {
                 let alert = UIAlertController().returnAlert(title: "Error", message: error, action: "OK")
                 self.activityIndicator.stopAnimating()
                 self.activityIndicator.isHidden = true
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
                 self.present(alert, animated: true)
             }
         }
