@@ -40,7 +40,7 @@
                         </subviews>
                     </stackView>
                 </subviews>
-                <color key="backgroundColor" red="0.12984204290000001" green="0.12984612579999999" blue="0.12984395030000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                <color key="backgroundColor" red="0.94027283031088082" green="0.94027283031088082" blue="0.94027283031088082" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="duz-G3-NRB" secondAttribute="trailing" constant="16" id="0CQ-Xd-qdg"/>
                     <constraint firstItem="duz-G3-NRB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="K1L-7k-Ck7"/>
@@ -48,6 +48,7 @@
                     <constraint firstAttribute="bottom" secondItem="duz-G3-NRB" secondAttribute="bottom" constant="10" id="ewo-c3-H73"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="projectGradeLabel" destination="uXK-LD-Ei9" id="ci7-HX-9dp"/>

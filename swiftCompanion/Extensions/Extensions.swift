@@ -45,12 +45,12 @@ extension UIAlertController {
 }
 
 extension UIView {
-    func setGradientColor(colorOne: UIColor, colorTwo: UIColor) {
+    func setGradientColor(colorOne: UIColor, colorTwo: UIColor, startPosition: CGPoint) {
         let gradient = CAGradientLayer()
         
         gradient.frame = bounds
         gradient.colors = [colorOne.cgColor, colorTwo.cgColor]
-        gradient.startPoint = CGPoint(x: 0.0, y: 0.0)
+        gradient.startPoint = startPosition
         gradient.endPoint = CGPoint(x: 0.0, y: 1.0)
         
         layer.insertSublayer(gradient, at: 0)

@@ -24,7 +24,8 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.setGradientColor(colorOne: UIColor(red: 4/255, green: 4/255, blue: 9/255, alpha: 1.0),
-                              colorTwo: UIColor(red: 48/255, green: 43/255, blue: 99/255, alpha: 1.0))
+                              colorTwo: UIColor(red: 48/255, green: 43/255, blue: 99/255, alpha: 1.0),
+                              startPosition: CGPoint(x: 0, y: 0))
         activityIndicator.isHidden = true
         activityIndicator.stopAnimating()
 
@@ -57,7 +58,7 @@ extension SearchViewController: UITextFieldDelegate {
                 self.activityIndicator.stopAnimating()
                 self.activityIndicator.isHidden = true
                 UIApplication.shared.isNetworkActivityIndicatorVisible = false
-                let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "UserInfoViewControllerID") as! UserInfoViewController
+                let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "UserVCID") as! UserVC
                 nextVC.user = user
                 self.navigationController?.pushViewController(nextVC, animated: true)
             }
