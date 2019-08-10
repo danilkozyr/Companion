@@ -12,42 +12,60 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="skillCellIdentifier" rowHeight="58" id="KGk-i7-Jjw" customClass="SkillCell" customModule="swiftCompanion" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="58"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="skillCellIdentifier" rowHeight="70" id="KGk-i7-Jjw" customClass="SkillCell" customModule="swiftCompanion" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="581" height="82"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="57.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="581" height="81.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kn4-Jt-SyW">
-                        <rect key="frame" x="16" y="10" width="288" height="25.5"/>
-                        <fontDescription key="fontDescription" name="Futura-MediumItalic" family="Futura" pointSize="14"/>
-                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="FN4-Xs-VOa">
-                        <rect key="frame" x="21" y="45.5" width="278" height="2"/>
-                        <color key="progressTintColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <color key="trackTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </progressView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PHu-zo-ytF" customClass="RoundView" customModule="swiftCompanion" customModuleProvider="target">
+                        <rect key="frame" x="6" y="10" width="569" height="61.5"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kn4-Jt-SyW">
+                                <rect key="frame" x="10" y="10" width="549" height="25.5"/>
+                                <fontDescription key="fontDescription" name="Futura-MediumItalic" family="Futura" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="FN4-Xs-VOa">
+                                <rect key="frame" x="16" y="45.5" width="537" height="2"/>
+                                <color key="progressTintColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="trackTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </progressView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="kn4-Jt-SyW" firstAttribute="top" secondItem="PHu-zo-ytF" secondAttribute="top" constant="10" id="4BH-38-dsJ"/>
+                            <constraint firstItem="FN4-Xs-VOa" firstAttribute="top" secondItem="kn4-Jt-SyW" secondAttribute="bottom" constant="10" id="AUR-IJ-mei"/>
+                            <constraint firstAttribute="bottom" secondItem="FN4-Xs-VOa" secondAttribute="bottom" constant="14" id="NyL-ui-WRp"/>
+                            <constraint firstItem="kn4-Jt-SyW" firstAttribute="leading" secondItem="PHu-zo-ytF" secondAttribute="leading" constant="10" id="SKA-5T-mPx"/>
+                            <constraint firstAttribute="trailing" secondItem="FN4-Xs-VOa" secondAttribute="trailing" constant="16" id="bzd-fO-XoD"/>
+                            <constraint firstAttribute="trailing" secondItem="kn4-Jt-SyW" secondAttribute="trailing" constant="10" id="shh-gJ-N22"/>
+                            <constraint firstItem="FN4-Xs-VOa" firstAttribute="leading" secondItem="PHu-zo-ytF" secondAttribute="leading" constant="16" id="xUp-1Y-fIK"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="13"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
                 </subviews>
-                <color key="backgroundColor" red="0.12984204290000001" green="0.12984612579999999" blue="0.12984395030000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
-                    <constraint firstItem="FN4-Xs-VOa" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="5" id="52o-zr-9S6"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="FN4-Xs-VOa" secondAttribute="trailing" constant="5" id="GSC-iE-JKS"/>
-                    <constraint firstItem="kn4-Jt-SyW" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="OUb-2A-siO"/>
-                    <constraint firstAttribute="trailing" secondItem="kn4-Jt-SyW" secondAttribute="trailing" constant="16" id="dyr-j4-EJG"/>
-                    <constraint firstItem="FN4-Xs-VOa" firstAttribute="top" secondItem="kn4-Jt-SyW" secondAttribute="bottom" constant="10" id="gIt-nN-i2t"/>
-                    <constraint firstAttribute="bottom" secondItem="FN4-Xs-VOa" secondAttribute="bottom" constant="10" id="kPj-qJ-7s0"/>
-                    <constraint firstItem="kn4-Jt-SyW" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="sAA-oY-Mx8"/>
+                    <constraint firstItem="PHu-zo-ytF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="d7T-AR-n8T"/>
+                    <constraint firstAttribute="trailing" secondItem="PHu-zo-ytF" secondAttribute="trailing" constant="6" id="eC0-BK-dYx"/>
+                    <constraint firstItem="PHu-zo-ytF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="6" id="vOB-8Z-rK5"/>
+                    <constraint firstAttribute="bottom" secondItem="PHu-zo-ytF" secondAttribute="bottom" constant="10" id="yep-5w-9cw"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="nameLabel" destination="kn4-Jt-SyW" id="g30-gG-Bsi"/>
                 <outlet property="progressBar" destination="FN4-Xs-VOa" id="5L6-7b-U31"/>
             </connections>
-            <point key="canvasLocation" x="34.782608695652179" y="38.169642857142854"/>
+            <point key="canvasLocation" x="34.057971014492757" y="42.1875"/>
         </tableViewCell>
     </objects>
 </document>

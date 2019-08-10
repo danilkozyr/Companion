@@ -26,6 +26,9 @@
 		5E3D13A722FE1383009BCA77 /* UserVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3D13A622FE1383009BCA77 /* UserVC.swift */; };
 		5E3D13AC22FE184A009BCA77 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3D13AA22FE184A009BCA77 /* ProfileCell.swift */; };
 		5E3D13AD22FE184A009BCA77 /* ProfileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E3D13AB22FE184A009BCA77 /* ProfileCell.xib */; };
+		5E61F0BD22FEC9FA0059103C /* RoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E61F0BC22FEC9FA0059103C /* RoundedView.swift */; };
+		5E61F0C522FEDD3A0059103C /* SectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E61F0C322FEDD390059103C /* SectionCell.swift */; };
+		5E61F0C622FEDD3A0059103C /* SectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E61F0C422FEDD390059103C /* SectionCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +53,9 @@
 		5E3D13A622FE1383009BCA77 /* UserVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserVC.swift; sourceTree = "<group>"; };
 		5E3D13AA22FE184A009BCA77 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		5E3D13AB22FE184A009BCA77 /* ProfileCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileCell.xib; sourceTree = "<group>"; };
+		5E61F0BC22FEC9FA0059103C /* RoundedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RoundedView.swift; path = swiftCompanion/View/RoundedView/RoundedView.swift; sourceTree = SOURCE_ROOT; };
+		5E61F0C322FEDD390059103C /* SectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionCell.swift; sourceTree = "<group>"; };
+		5E61F0C422FEDD390059103C /* SectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SectionCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +102,7 @@
 		55D87EF322DB3DE70035F60F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				5E61F0C722FEDD4C0059103C /* RoundedView */,
 				55E37A3922DCA00D00342D9C /* Cells */,
 				55D87EE522DB3BE80035F60F /* Main.storyboard */,
 			);
@@ -144,7 +151,8 @@
 		55E37A3922DCA00D00342D9C /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				5E3D13A922FE1825009BCA77 /* New Group */,
+				5E61F0C222FEDCE00059103C /* SectionCell */,
+				5E3D13A922FE1825009BCA77 /* ProfileCell */,
 				55E37A3F22DCACCC00342D9C /* ProjectCell */,
 				55E37A3A22DCA01300342D9C /* SkillCell */,
 			);
@@ -169,13 +177,30 @@
 			path = ProjectCell;
 			sourceTree = "<group>";
 		};
-		5E3D13A922FE1825009BCA77 /* New Group */ = {
+		5E3D13A922FE1825009BCA77 /* ProfileCell */ = {
 			isa = PBXGroup;
 			children = (
 				5E3D13AA22FE184A009BCA77 /* ProfileCell.swift */,
 				5E3D13AB22FE184A009BCA77 /* ProfileCell.xib */,
 			);
-			path = "New Group";
+			path = ProfileCell;
+			sourceTree = "<group>";
+		};
+		5E61F0C222FEDCE00059103C /* SectionCell */ = {
+			isa = PBXGroup;
+			children = (
+				5E61F0C322FEDD390059103C /* SectionCell.swift */,
+				5E61F0C422FEDD390059103C /* SectionCell.xib */,
+			);
+			path = SectionCell;
+			sourceTree = "<group>";
+		};
+		5E61F0C722FEDD4C0059103C /* RoundedView */ = {
+			isa = PBXGroup;
+			children = (
+				5E61F0BC22FEC9FA0059103C /* RoundedView.swift */,
+			);
+			path = RoundedView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -242,6 +267,7 @@
 				5E3D13AD22FE184A009BCA77 /* ProfileCell.xib in Resources */,
 				55E37A4322DCACE400342D9C /* ProjectCell.xib in Resources */,
 				55D87EE722DB3BE80035F60F /* Main.storyboard in Resources */,
+				5E61F0C622FEDD3A0059103C /* SectionCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -254,6 +280,8 @@
 			files = (
 				5E3D13AC22FE184A009BCA77 /* ProfileCell.swift in Sources */,
 				55D87F0222DB789E0035F60F /* Extensions.swift in Sources */,
+				5E61F0BD22FEC9FA0059103C /* RoundedView.swift in Sources */,
+				5E61F0C522FEDD3A0059103C /* SectionCell.swift in Sources */,
 				55E37A2F22DC8C9100342D9C /* Skills.swift in Sources */,
 				55E37A3D22DCA03F00342D9C /* SkillCell.swift in Sources */,
 				55E37A4222DCACE400342D9C /* ProjectCell.swift in Sources */,

@@ -28,6 +28,7 @@ class UserVC: UIViewController {
             tableView.register(UINib(nibName: "ProjectCell", bundle: nil), forCellReuseIdentifier: "projectCellIdentifier")
             tableView.register(UINib(nibName: "ProfileCell", bundle: nil), forCellReuseIdentifier: "profileCell")
             tableView.register(UINib(nibName: "SkillCell", bundle: nil), forCellReuseIdentifier: "skillCellIdentifier")
+            tableView.register(UINib(nibName: "SectionCell", bundle: nil), forCellReuseIdentifier: "sectionCell")
 
         }
     }
@@ -41,6 +42,7 @@ class UserVC: UIViewController {
                               startPosition: CGPoint(x: 0, y: 0))
         
     }
+    
 }
 
 extension UserVC: UITableViewDataSource {
@@ -52,9 +54,9 @@ extension UserVC: UITableViewDataSource {
         if section == 0 {
             return 1
         } else if section == 1 {
-            return user!.projects.count
+            return user!.projects.count + 1
         } else {
-            return user!.skills.count
+            return user!.skills.count + 1
         }
     }
     
@@ -62,6 +64,7 @@ extension UserVC: UITableViewDataSource {
         
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "profileCell") as! ProfileCell
+            
             cell.backgroundColor = .clear
             cell.profileImage.downloaded(from: URL(string: user!.imageUrl)!)
             cell.fullName.text = user!.firstName + " " + user!.lastName
@@ -73,11 +76,17 @@ extension UserVC: UITableViewDataSource {
             cell.place.text = user!.place
             let level = user!.level.split(separator: ".")
             cell.level.text = "Level \(level[0]) - \(level[1])%"
+            
             return cell
         } else if indexPath.section == 1 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "projectCellIdentifier") as! ProjectCell
+            if indexPath.row == 0 {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "sectionCell") as! SectionCell
+                cell.name.text = "Projects"
+                return cell
+            }
             
-            let project = user?.projects[indexPath.row]
+            let cell = tableView.dequeueReusableCell(withIdentifier: "projectCellIdentifier") as! ProjectCell
+            let project = user?.projects[indexPath.row - 1]
             cell.projectNameLabel.text = project?.name
             guard project?.grade != nil else {
                 cell.projectGradeLabel.text = ""
@@ -86,6 +95,7 @@ extension UserVC: UITableViewDataSource {
                 
                 return cell
             }
+            
             cell.projectGradeLabel.text = project?.grade
             
             if (Int(cell.projectGradeLabel.text!)! >= 75) {
@@ -97,11 +107,15 @@ extension UserVC: UITableViewDataSource {
             
             return cell
         } else {
+            if indexPath.row == 0 {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "sectionCell") as! SectionCell
+                cell.name.text = "Skills"
+                return cell
+            }
             let cell = tableView.dequeueReusableCell(withIdentifier: "skillCellIdentifier") as! SkillCell
 
             // TODO: Change skills design
-            
-            let skill = (user?.skills[indexPath.row])!
+            let skill = (user?.skills[indexPath.row - 1])!
             cell.nameLabel.text = "\(skill.name) - level: \(skill.level)"
             cell.progressBar.transform = CGAffineTransform(scaleX: 1, y: 2)
             cell.progressBar.progress = Float(skill.level)! / 10.0

@@ -106,7 +106,7 @@
                         </constraints>
                     </stackView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Level 6 - 81%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="59x-KK-zbS">
-                        <rect key="frame" x="20" y="520.5" width="374" height="39.5"/>
+                        <rect key="frame" x="20" y="520.5" width="374" height="57"/>
                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="18"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
@@ -129,7 +129,7 @@
                     <constraint firstItem="59x-KK-zbS" firstAttribute="top" secondItem="uCH-ar-QRE" secondAttribute="bottom" constant="8" id="J7i-6t-HM6"/>
                     <constraint firstItem="Kjq-VP-kGr" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="KhP-bg-P9N"/>
                     <constraint firstAttribute="trailing" secondItem="Kjq-VP-kGr" secondAttribute="trailing" constant="16" id="LXV-AT-7Ax"/>
-                    <constraint firstAttribute="bottom" secondItem="59x-KK-zbS" secondAttribute="bottom" constant="27.5" id="MWU-6t-b1A"/>
+                    <constraint firstAttribute="bottom" secondItem="59x-KK-zbS" secondAttribute="bottom" constant="10" id="MWU-6t-b1A"/>
                     <constraint firstItem="uCH-ar-QRE" firstAttribute="top" secondItem="yud-Th-8nW" secondAttribute="bottom" constant="14" id="PRM-5Q-FIJ"/>
                     <constraint firstItem="59x-KK-zbS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="b6l-hy-T4t"/>
                     <constraint firstItem="yud-Th-8nW" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="gBw-EU-TMW"/>
