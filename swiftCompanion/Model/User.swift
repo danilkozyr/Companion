@@ -24,6 +24,6 @@ struct User {
     var location: String
     
     var skills: [Skill]
-    let projects: [Project]
+    var projects: [Project]?
     
 }

@@ -10,7 +10,7 @@ import UIKit
 
 class ProjectCell: UITableViewCell {
     
-    @IBOutlet weak var projectNameLabel: UILabel!
-    @IBOutlet weak var projectGradeLabel: UILabel!
+    @IBOutlet weak var projectName: UILabel!
+    @IBOutlet weak var projectGrade: UILabel!
     
 }

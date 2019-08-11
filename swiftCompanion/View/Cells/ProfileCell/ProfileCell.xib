@@ -25,6 +25,12 @@
                             <constraint firstAttribute="width" secondItem="yud-Th-8nW" secondAttribute="height" multiplier="1:1" id="8b7-Fg-6Fo"/>
                         </constraints>
                     </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Daniil Kozyr" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B4r-qu-8Oo">
+                        <rect key="frame" x="16" y="343.5" width="382" height="23.5"/>
+                        <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="18"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+380991838431" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kjq-VP-kGr">
                         <rect key="frame" x="16" y="377" width="382" height="21"/>
                         <fontDescription key="fontDescription" name="Futura-MediumItalic" family="Futura" pointSize="16"/>
@@ -106,36 +112,38 @@
                         </constraints>
                     </stackView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Level 6 - 81%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="59x-KK-zbS">
-                        <rect key="frame" x="20" y="520.5" width="374" height="57"/>
+                        <rect key="frame" x="20" y="520.5" width="374" height="40"/>
                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="18"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Daniil Kozyr" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B4r-qu-8Oo">
-                        <rect key="frame" x="16" y="343.5" width="382" height="23.5"/>
-                        <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="18"/>
-                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="QL4-ws-RdP">
+                        <rect key="frame" x="20" y="575.5" width="374" height="2"/>
+                        <color key="progressTintColor" white="1" alpha="0.90000000000000002" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="trackTintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </progressView>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="Kjq-VP-kGr" firstAttribute="top" secondItem="B4r-qu-8Oo" secondAttribute="bottom" constant="10" id="0zQ-iw-YI5"/>
                     <constraint firstItem="uCH-ar-QRE" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="6bT-h9-CDT"/>
+                    <constraint firstAttribute="trailing" secondItem="QL4-ws-RdP" secondAttribute="trailing" constant="20" id="9Sz-64-Dle"/>
                     <constraint firstItem="yud-Th-8nW" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="AmY-E5-cdi"/>
                     <constraint firstAttribute="trailingMargin" secondItem="uCH-ar-QRE" secondAttribute="trailing" id="GmT-lo-Lpa"/>
                     <constraint firstAttribute="trailing" secondItem="yud-Th-8nW" secondAttribute="trailing" id="HG4-WP-Wga"/>
                     <constraint firstItem="uCH-ar-QRE" firstAttribute="top" secondItem="Kjq-VP-kGr" secondAttribute="bottom" constant="30" id="IJO-p7-HSF"/>
+                    <constraint firstAttribute="bottom" secondItem="QL4-ws-RdP" secondAttribute="bottom" constant="10" id="Iwy-zg-r8o"/>
                     <constraint firstItem="59x-KK-zbS" firstAttribute="top" secondItem="uCH-ar-QRE" secondAttribute="bottom" constant="8" id="J7i-6t-HM6"/>
                     <constraint firstItem="Kjq-VP-kGr" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="KhP-bg-P9N"/>
                     <constraint firstAttribute="trailing" secondItem="Kjq-VP-kGr" secondAttribute="trailing" constant="16" id="LXV-AT-7Ax"/>
-                    <constraint firstAttribute="bottom" secondItem="59x-KK-zbS" secondAttribute="bottom" constant="10" id="MWU-6t-b1A"/>
                     <constraint firstItem="uCH-ar-QRE" firstAttribute="top" secondItem="yud-Th-8nW" secondAttribute="bottom" constant="14" id="PRM-5Q-FIJ"/>
+                    <constraint firstItem="QL4-ws-RdP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="Vfb-6n-9wc"/>
                     <constraint firstItem="59x-KK-zbS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="b6l-hy-T4t"/>
                     <constraint firstItem="yud-Th-8nW" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="gBw-EU-TMW"/>
                     <constraint firstAttribute="trailing" secondItem="B4r-qu-8Oo" secondAttribute="trailing" constant="16" id="jAd-UQ-sUk"/>
                     <constraint firstItem="B4r-qu-8Oo" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="kwC-iF-tXn"/>
                     <constraint firstAttribute="trailingMargin" secondItem="59x-KK-zbS" secondAttribute="trailing" id="q4j-r7-maV"/>
+                    <constraint firstItem="QL4-ws-RdP" firstAttribute="top" secondItem="59x-KK-zbS" secondAttribute="bottom" constant="15" id="rPo-9Z-VM4"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -144,6 +152,7 @@
                 <outlet property="corrections" destination="9an-lm-z8H" id="sSD-LE-sq8"/>
                 <outlet property="fullName" destination="B4r-qu-8Oo" id="nlN-61-WCh"/>
                 <outlet property="level" destination="59x-KK-zbS" id="VpT-pO-lQL"/>
+                <outlet property="levelProgress" destination="QL4-ws-RdP" id="4Ip-hv-JAj"/>
                 <outlet property="location" destination="Udm-gD-DHl" id="Tjm-uk-0LF"/>
                 <outlet property="phone" destination="Kjq-VP-kGr" id="5dV-C3-8eL"/>
                 <outlet property="place" destination="ezT-0k-3iA" id="uMG-Vb-J81"/>

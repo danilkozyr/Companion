@@ -7,168 +7,187 @@
 //
 
 import Foundation
-
+import SwiftyJSON
+import Alamofire
 
 class APIDownloader {
 
+    enum Response {
+        case success(Any)
+        case error(String)
+    }
+    
     func authorizeApplication(failure: @escaping (String) -> Void ) {
-        var urlComponents = URLComponents(string: "https://api.intra.42.fr/oauth/token")
-        urlComponents?.queryItems = [
-            URLQueryItem(name: "grant_type", value: "client_credentials"),
-            URLQueryItem(name: "client_id", value: APIData.client_id),
-            URLQueryItem(name: "client_secret", value: APIData.client_secret)
-        ]
-        var request = URLRequest(url: urlComponents!.url!)
-        request.httpMethod = "POST"
-
-        URLSession.shared.dataTask(with: request) { (data, response, error) in
-            guard let data = data, error == nil else {
-                failure("Settings -> Companion -> Use Cellular Data or connect to wifi and reload the app.")
-                return
-            }
-
-            guard let json = try? JSONSerialization.jsonObject(with: data, options: []) as? NSDictionary else {
-                failure("Settings -> Companion -> Use Cellular Data or connect to wifi and reload the app.")
+        guard let url = URL(string: "https://api.intra.42.fr/oauth/token") else {
+            failure("Error")
+            return
+        }
+        
+        let parameters =  ["grant_type" : "client_credentials",
+                           "client_id" : APIData.client_id,
+                           "client_secret" : APIData.client_secret]
+        
+        Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON(completionHandler: { (response) in
+            if response.error != nil {
+                failure("Check Internet Connection")
                 return
             }
             
-            APIData.token = json["access_token"] as! String
-        }.resume()
-    }
-
-    func downloadUser(with login: String, success: @escaping (User) -> Void, failure: @escaping (String) -> Void) {
-        let url = URL(string: "https://api.intra.42.fr/v2/users/" + login)
-        var request = URLRequest(url: url!)
-        request.httpMethod = "GET"
-        request.setValue("Bearer " + APIData.token, forHTTPHeaderField: "Authorization")
-
-
-        URLSession.shared.dataTask(with: request) { (data, response, error) in
-            guard let data = data, error == nil else {
-                failure("downloadUser Error")
+            switch response.result {
+            case .success(let responseDictionary):
+                let json = JSON(responseDictionary)
+                APIData.token = json["access_token"].string!
+            case .failure(_):
+                failure("Error Occured")
                 return
             }
+        })
+    }
 
-            if let json = try? JSONSerialization.jsonObject(with: data, options: []) as? NSDictionary {
+    func downloadUser(with login: String, completion: @escaping (Response) -> Void) {
+        guard let url = URL(string: "https://api.intra.42.fr/v2/users/" + login) else {
+            completion(.error("You have used restricted symbols/language!"))
+            return
+        }
+        let header: HTTPHeaders = ["Authorization":  "Bearer " + APIData.token]
+        
+        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).responseJSON { (response) in
+            if response.error != nil {
+                completion(.error("Check Internet Connection"))
+                return
+            }
+            
+            switch response.result {
+            case .success(let dictionary):
+                
+                let json = JSON(dictionary)
                 guard json != [:] else {
-                    failure("Invalid login. Try again later")
+                    completion(.error("Invalid login. Try again later"))
                     return
                 }
+
+
+                if var user = self.unparseJSON(json: json, with: login) {
+        
+                    self.downloadProjects(with: user.id, completion: { (response) in
+                        switch response {
+                        case .success(let downloadedData):
+                            let projects = downloadedData as! [Project]
+                            user.projects = projects
+                            completion(.success(user))
+                        case .error(let error):
+                            completion(.error(error))
+                            return
+                        }
+                    })
+                    
+                } else {
+                    completion(.error("User did not pass the pool"))
+                }
                 
-                self.downloadProjects(with: json.value(forKey: "id") as! Int, callBack: { (projects) in
-                    let user = self.unparseJSON(json: json, with: login, with: projects!)
-                    if user != nil {
-                        success(user!)
-                    } else {
-                        failure("User did not pass the pool")
-                    }
-                }, failure: { (error) in
-                    failure(error)
-                })
-
-
-            } else {
-                failure("downloadUser JSON fail")
+            case .failure(_):
+                completion(.error("Error Occured"))
+                return
             }
-
-        }.resume()
+        }
+        
     }
 
     
-    private func downloadProjects(with userId: Int, callBack: @escaping ([Project]?) -> (), failure: @escaping (String) -> ()) {
-        var projects: [Project] = []
-        let url = URL(string: "https://api.intra.42.fr/v2/projects_users?user_id=\(userId)&page[size]=100")
-        var request = URLRequest(url: url!)
-        request.httpMethod = "GET"
-        request.addValue("Bearer " + APIData.token, forHTTPHeaderField: "Authorization")
+    private func downloadProjects(with userId: Int, completion: @escaping (Response) -> Void) {
 
-        URLSession.shared.dataTask(with: request) { (data, response, error) in
-            guard let data = data, error == nil else {
-                failure("downloadProjects error")
+        guard let url = URL(string: "https://api.intra.42.fr/v2/projects_users?user_id=\(userId)&page[size]=100") else {
+            completion(.error("You have used restricted symbols/language!"))
+            return
+        }
+        let header: HTTPHeaders = ["Authorization":  "Bearer " + APIData.token]
+        
+        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).responseJSON { (response) in
+            if response.error != nil {
+                completion(.error("Check Internet Connection"))
                 return
             }
-            if let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [NSDictionary] {
+            
+            var projects: [Project] = []
+            switch response.result {
+            case .success(let data):
+                guard let json = JSON(data).array else { return }
                 for item in json {
-                    let cursus_ids = item["cursus_ids"] as? NSArray
-                    if (cursus_ids?.contains(1))! {
-                        let projectDetails = item["project"] as? NSDictionary
-                        let name = projectDetails!["name"] as! String
-
-                        if name != "Rushes" && projectDetails!["parent_id"] as? NSNull != nil {
-                            let grade = (item["final_mark"] as? NSNumber)?.stringValue
-
+                    guard let cursus_ids = item["cursus_ids"].array else { return }
+                    if cursus_ids.contains(1) {
+                        guard let name = item["project"]["name"].string else { return }
+                        
+                        if name != "Rushes" && item["project"]["parent_id"].null != nil {
+                            let grade = item["final_mark"].number?.stringValue
                             projects.append(Project(name: name, grade: grade))
                         }
-
                     }
-
                 }
-                callBack(projects)
-            } else {
-                failure("downloadPorjects() json fail")
+                completion(.success(projects))
+            case .failure(_):
+                completion(.error("Error Occured"))
+                return
             }
-        }.resume()
+        }
 
     }
 
-    private func unparseJSON(json: NSDictionary, with login: String, with projects: [Project]) -> User? {
-        let id = json.value(forKey: "id") as! Int
-        let firstName = json["first_name"] as! String
-        let lastName = json["last_name"] as! String
-        let email = json["email"] as! String
-        let image_url = json["image_url"] as! String
+    private func unparseJSON(json: JSON, with login: String) -> User? {
+        guard let id = json["id"].int else { return nil }
+        guard let firstName = json["first_name"].string else { return nil }
+        guard let lastName = json["last_name"].string  else { return nil }
+        
+        
+        guard let email = json["email"].string  else { return nil }
+        guard let image_url = json["image_url"].string  else { return nil }
 
-        let correction_point = json.value(forKey: "correction_point") as! Int
-        let wallet = json.value(forKey: "wallet") as! Int
+        guard let correction_point = json["correction_point"].int  else { return nil }
+        guard let wallet = json["wallet"].int  else { return nil }
 
         var poolDate: String = ""
-        
-        if let poolMonth = json["pool_month"] as? String, let poolYear = json["pool_year"] as? String {
-            poolDate = poolMonth + " " + poolYear
-        } else {
-            poolDate = "Admin"
-        }
-        
 
-        var phone = json["phone"]
-        if phone as? String == nil {
+        guard let poolMonth = json["pool_month"].string, let poolYear = json["pool_year"].string else { return nil }
+        
+        poolDate = poolMonth + " " + poolYear
+
+        var phone = json["phone"].string
+        if phone == nil {
             phone = "Unknown"
         }
+        
+        var place = json["location"].string
 
-        var place = json["location"]
-        if place as? String == nil {
-            place = "Unavailable"
+        guard let city = json["campus"][0]["city"].string, let country = json["campus"][0]["country"].string else {
+            return nil
         }
+        let location = city + " " + country
 
-        let campus = json["campus"] as? [NSDictionary]
-        var location = ""
-        for camp in campus! {
-            let city = camp["city"] as! String
-            let country = camp["country"] as! String
-            location = city + ", " + country
-        }
-
-
-        let cursus_users = json["cursus_users"] as? [NSDictionary]
+        guard let cursus_users = json["cursus_users"].array else { return nil }
         var level = ""
         var skills: [Skill] = []
-        for cursus in cursus_users! {
-            if (cursus["cursus_id"] as! Int == 1) {
-                let skillsFromJson = cursus["skills"] as? [NSDictionary]
-                for skill in skillsFromJson! {
-                    let name = skill["name"] as! String
-                    let level = (skill["level"] as! NSNumber).doubleValue.roundDouble
-                    let id = skill["id"] as! NSNumber
-                    skills.append(Skill(id: Int(truncating: id), name: name, level: level))
+        for cursus in cursus_users {
+            if (cursus["cursus_id"].int == 1) {
+                guard let skillsFromJson = cursus["skills"].array else { return nil }
+                for skill in skillsFromJson {
+                    guard let name = skill["name"].string else { return nil }
+                    guard let level = skill["level"].number?.doubleValue.roundDouble else { return nil }
+                    guard let id = skill["id"].number?.intValue else { return nil }
+                    skills.append(Skill(id: id, name: name, level: level))
                 }
-                level = (cursus["level"] as! NSNumber).doubleValue.roundDouble
+                level = cursus["level"].number!.doubleValue.roundDouble
             }
         }
 
         if skills.isEmpty {
             return nil
         }
-        
+
+        if place == nil {
+            // TODO: Download last location
+            //            downloadLastLocation(with id: id, )
+            place = "Unavailable"
+        }
+
         let user = User(id: id,
                          login: login,
                          firstName: firstName,
@@ -176,15 +195,15 @@ class APIDownloader {
                          email: email,
                          imageUrl: image_url,
                          poolDate: poolDate,
-                         phone: phone as! String,
-                         place: place as! String,
+                         phone: phone!,
+                         place: place!,
                          level: level,
                          correctionPoints: correction_point,
                          wallet: wallet,
                          location: location,
                          skills: skills,
-                         projects: projects)
-        
+                         projects: nil)
+
         return user
     }
     

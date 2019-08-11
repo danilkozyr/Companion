@@ -30,7 +30,7 @@ extension UIImageView {
             DispatchQueue.main.async() {
                 self.image = image
             }
-            }.resume()
+        }.resume()
     }
 }
 extension UIAlertController {
@@ -55,7 +55,15 @@ extension UIView {
         
         layer.insertSublayer(gradient, at: 0)
     }
+
+    func setCorner(with radius: CGFloat, borderWidth: CGFloat, color: UIColor){
+        self.layer.cornerRadius = radius
+        self.layer.borderColor = color.cgColor
+        self.layer.borderWidth = borderWidth
+        self.clipsToBounds = true
+    }
 }
+
 
 extension Double {
     var roundDouble:String {
@@ -63,3 +71,8 @@ extension Double {
     }
 }
 
+extension UINavigationController {
+    open override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+}

@@ -25,5 +25,15 @@ class ProfileCell: UITableViewCell {
     @IBOutlet weak var corrections: UILabel!
     @IBOutlet weak var wallet: UILabel!
     @IBOutlet weak var level: UILabel!
+    @IBOutlet weak var levelProgress: UIProgressView! {
+        didSet {
+            levelProgress.setCorner(with: 10, borderWidth: 0.5, color: .white)
+//            levelProgress.layer.cornerRadius = 10
+//            levelProgress.clipsToBounds = true
+//            levelProgress.layer.borderWidth = 1
+//            levelProgress.layer.borderColor = UIColor.white.cgColor
+            levelProgress.transform = CGAffineTransform(scaleX: 1, y: 5)
+        }
+    }
     
 }

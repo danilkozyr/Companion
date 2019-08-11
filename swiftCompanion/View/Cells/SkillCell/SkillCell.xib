@@ -12,7 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="skillCellIdentifier" rowHeight="70" id="KGk-i7-Jjw" customClass="SkillCell" customModule="swiftCompanion" customModuleProvider="target">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="skillCell" rowHeight="70" id="KGk-i7-Jjw" customClass="SkillCell" customModule="swiftCompanion" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="581" height="82"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
@@ -62,8 +62,8 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="nameLabel" destination="kn4-Jt-SyW" id="g30-gG-Bsi"/>
-                <outlet property="progressBar" destination="FN4-Xs-VOa" id="5L6-7b-U31"/>
+                <outlet property="skillName" destination="kn4-Jt-SyW" id="g30-gG-Bsi"/>
+                <outlet property="skillProgress" destination="FN4-Xs-VOa" id="5L6-7b-U31"/>
             </connections>
             <point key="canvasLocation" x="34.057971014492757" y="42.1875"/>
         </tableViewCell>

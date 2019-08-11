@@ -10,6 +10,6 @@ import UIKit
 
 class SkillCell: UITableViewCell {
 
-    @IBOutlet weak var nameLabel: UILabel!   
-    @IBOutlet weak var progressBar: UIProgressView!
+    @IBOutlet weak var skillName: UILabel!   
+    @IBOutlet weak var skillProgress: UIProgressView!
 }
