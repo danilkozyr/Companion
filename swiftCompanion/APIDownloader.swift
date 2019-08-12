@@ -59,13 +59,11 @@ class APIDownloader {
             
             switch response.result {
             case .success(let dictionary):
-                
                 let json = JSON(dictionary)
                 guard json != [:] else {
                     completion(.error("Invalid login. Try again later"))
                     return
                 }
-
 
                 if var user = self.unparseJSON(json: json, with: login) {
         
@@ -84,7 +82,6 @@ class APIDownloader {
                 } else {
                     completion(.error("User did not pass the pool"))
                 }
-                
             case .failure(_):
                 completion(.error("Error Occured"))
                 return
@@ -136,30 +133,19 @@ class APIDownloader {
         guard let id = json["id"].int else { return nil }
         guard let firstName = json["first_name"].string else { return nil }
         guard let lastName = json["last_name"].string  else { return nil }
-        
-        
         guard let email = json["email"].string  else { return nil }
         guard let image_url = json["image_url"].string  else { return nil }
-
         guard let correction_point = json["correction_point"].int  else { return nil }
         guard let wallet = json["wallet"].int  else { return nil }
 
         var poolDate: String = ""
-
         guard let poolMonth = json["pool_month"].string, let poolYear = json["pool_year"].string else { return nil }
-        
         poolDate = poolMonth + " " + poolYear
-
-        var phone = json["phone"].string
-        if phone == nil {
-            phone = "Unknown"
-        }
         
-        var place = json["location"].string
+        let phone = json["phone"].string
+        let place = json["location"].string
 
-        guard let city = json["campus"][0]["city"].string, let country = json["campus"][0]["country"].string else {
-            return nil
-        }
+        guard let city = json["campus"][0]["city"].string, let country = json["campus"][0]["country"].string else { return nil }
         let location = city + " " + country
 
         guard let cursus_users = json["cursus_users"].array else { return nil }
@@ -177,17 +163,6 @@ class APIDownloader {
                 level = cursus["level"].number!.doubleValue.roundDouble
             }
         }
-
-        if skills.isEmpty {
-            return nil
-        }
-
-        if place == nil {
-            // TODO: Download last location
-            //            downloadLastLocation(with id: id, )
-            place = "Unavailable"
-        }
-
         let user = User(id: id,
                          login: login,
                          firstName: firstName,
@@ -195,15 +170,14 @@ class APIDownloader {
                          email: email,
                          imageUrl: image_url,
                          poolDate: poolDate,
-                         phone: phone!,
-                         place: place!,
+                         phone: phone,
+                         place: place,
                          level: level,
                          correctionPoints: correction_point,
                          wallet: wallet,
                          location: location,
                          skills: skills,
                          projects: nil)
-
         return user
     }
     

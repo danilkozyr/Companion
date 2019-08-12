@@ -16,8 +16,8 @@ struct User {
     let email: String
     let imageUrl : String
     let poolDate: String
-    let phone: String
-    let place: String
+    let phone: String?
+    let place: String?
     let level: String
     let correctionPoints: Int
     let wallet: Int

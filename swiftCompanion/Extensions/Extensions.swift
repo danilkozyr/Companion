@@ -64,7 +64,6 @@ extension UIView {
     }
 }
 
-
 extension Double {
     var roundDouble:String {
         return String(format: "%.2f", self)

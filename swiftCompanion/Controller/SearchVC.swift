@@ -28,7 +28,7 @@ class SearchVC: UIViewController {
     }
     
     private func getAPIToken() {
-        api.authorizeApplication(failure: { (error) in
+        api.authorizeApplication(failure: { [unowned self] error in
             DispatchQueue.main.sync {
                 let alert = UIAlertController().returnAlert(title: "You are not connected to the Internet", message: error, action: "OK")
                 self.present(alert, animated: true)
@@ -43,23 +43,24 @@ extension SearchVC: UITextFieldDelegate {
         textField.resignFirstResponder()
         
         guard APIData.token != "" else {
-            getAPIToken()
             return false
         }
         
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         activityIndicator.isHidden = false
         activityIndicator.startAnimating()
+        view.isUserInteractionEnabled = false
         
         var login = textField.text?.replacingOccurrences(of: " ", with: "")
         login = login?.lowercased()
-        api.downloadUser(with: login!) { (result) in
+        api.downloadUser(with: login!) { [unowned self] result in
             switch result {
             case .success(let get):
                 DispatchQueue.main.async {
                     let user = get as! User
                     self.activityIndicator.stopAnimating()
                     self.activityIndicator.isHidden = true
+                    self.view.isUserInteractionEnabled = true
                     UIApplication.shared.isNetworkActivityIndicatorVisible = false
                     let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "UserVCID") as! UserVC
                     nextVC.user = user
@@ -69,6 +70,7 @@ extension SearchVC: UITextFieldDelegate {
                 DispatchQueue.main.async {
                     let alert = UIAlertController().returnAlert(title: "Error", message: error, action: "OK")
                     self.activityIndicator.isHidden = true
+                    self.view.isUserInteractionEnabled = true
                     UIApplication.shared.isNetworkActivityIndicatorVisible = false
                     self.activityIndicator.stopAnimating()
                     self.present(alert, animated: true)

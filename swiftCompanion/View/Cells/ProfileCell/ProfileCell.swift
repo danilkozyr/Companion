@@ -10,13 +10,6 @@ import UIKit
 
 class ProfileCell: UITableViewCell {
 
-    @IBOutlet weak var profileImage: UIImageView! {
-        didSet {
-            profileImage.setGradientColor(colorOne: .clear,
-                                          colorTwo: .black,
-                                          startPosition: CGPoint(x: 0, y: 0.4))
-        }
-    }
     @IBOutlet weak var fullName: UILabel!
     @IBOutlet weak var phone: UILabel!
     @IBOutlet weak var place: UILabel!
@@ -28,11 +21,12 @@ class ProfileCell: UITableViewCell {
     @IBOutlet weak var levelProgress: UIProgressView! {
         didSet {
             levelProgress.setCorner(with: 10, borderWidth: 0.5, color: .white)
-//            levelProgress.layer.cornerRadius = 10
-//            levelProgress.clipsToBounds = true
-//            levelProgress.layer.borderWidth = 1
-//            levelProgress.layer.borderColor = UIColor.white.cgColor
             levelProgress.transform = CGAffineTransform(scaleX: 1, y: 5)
+        }
+    }
+    @IBOutlet weak var profileImage: UIImageView! {
+        didSet {
+            profileImage.setGradientColor(colorOne: .clear, colorTwo: .black, startPosition: CGPoint(x: 0, y: 0.4))
         }
     }
     

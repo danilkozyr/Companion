@@ -6,9 +6,6 @@
 //  Copyright © 2019 Daniil KOZYR. All rights reserved.
 //
 
-// TODO: Check bugs
-// TODO: Rewrite Downloader a little bit
-// TODO: Fix console
 // TODO: Last Location
 
 import UIKit
@@ -38,7 +35,6 @@ class UserVC: UIViewController {
         view.setGradientColor(colorOne: UIColor(red: 4/255, green: 4/255, blue: 9/255, alpha: 1.0),
                             colorTwo: UIColor(red: 48/255, green: 43/255, blue: 99/255, alpha: 1.0),
                             startPosition: CGPoint(x: 0, y: 0))
-        
     }
 }
 
@@ -51,9 +47,9 @@ extension UserVC: UITableViewDataSource {
         if section == 0 {
             return 1
         } else if section == 1 {
-            return user!.projects!.count + 1
+            return user!.projects!.isEmpty ? 0 : user!.projects!.count + 1
         } else {
-            return user!.skills.count + 1
+            return user!.skills.isEmpty ? 0 : user!.skills.count + 1
         }
     }
     
@@ -70,12 +66,21 @@ extension UserVC: UITableViewDataSource {
             cell.wallet.text = "Wallet: \(user!.wallet)"
             cell.corrections.text = "Corrections: \(user!.correctionPoints)"
             cell.pool.text = user!.poolDate
-            cell.place.text = user!.place
-            var level = user!.level.split(separator: ".")
-            cell.level.text = "Level \(level[0]) - \(level[1])%"
+            if user?.place == nil {
+                cell.place.text = "unavailable"
+            } else {
+                cell.place.text = user!.place
+            }
             
-            level[1] = "0." + level[1]
-            cell.levelProgress.progress = Float(level[1])!
+            var level = user!.level.split(separator: ".")
+            if level.isEmpty {
+                cell.levelProgress.isHidden = true
+                cell.level.text = "Pool Coder"
+            } else {
+                cell.level.text = "Level \(level[0]) - \(level[1])%"
+                level[1] = "0." + level[1]
+                cell.levelProgress.progress = Float(level[1])!
+            }
             
             return cell
         } else if indexPath.section == 1 {
@@ -122,7 +127,4 @@ extension UserVC: UITableViewDataSource {
 
         }
     }
-    
-    
-    
 }
