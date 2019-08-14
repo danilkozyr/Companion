@@ -11,45 +11,48 @@ import SwiftyJSON
 import Alamofire
 
 class APIDownloader {
-
+    
+    private let client_id: String = "dbca5241fdb6c9a667455675619a0d57fa51c7ba40b6830809583391331c8531"
+    private let client_secret: String = "dfe4854420649742f35b472bd112a83b1b794b9ebf1611fec4f202825127bd49"
+    
     enum Response {
         case success(Any)
         case error(String)
     }
     
-    func authorizeApplication(failure: @escaping (String) -> Void ) {
+    func authorizeApplication(completion: @escaping (Response) -> Void) {
         guard let url = URL(string: "https://api.intra.42.fr/oauth/token") else {
-            failure("Error")
+            completion(.error("Check Internet Connection"))
             return
         }
         
         let parameters =  ["grant_type" : "client_credentials",
-                           "client_id" : APIData.client_id,
-                           "client_secret" : APIData.client_secret]
+                           "client_id" : client_id,
+                           "client_secret" : client_secret]
         
         Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON(completionHandler: { (response) in
             if response.error != nil {
-                failure("Check Internet Connection")
+                completion(.error("Check Internet Connection"))
                 return
             }
             
             switch response.result {
             case .success(let responseDictionary):
                 let json = JSON(responseDictionary)
-                APIData.token = json["access_token"].string!
+                completion(.success(json["access_token"].string!))
             case .failure(_):
-                failure("Error Occured")
+                completion(.error("Error Intra Token"))
                 return
             }
         })
     }
 
-    func downloadUser(with login: String, completion: @escaping (Response) -> Void) {
+    func downloadUser(with login: String, token: String, completion: @escaping (Response) -> Void) {
         guard let url = URL(string: "https://api.intra.42.fr/v2/users/" + login) else {
             completion(.error("You have used restricted symbols/language!"))
             return
         }
-        let header: HTTPHeaders = ["Authorization":  "Bearer " + APIData.token]
+        let header: HTTPHeaders = ["Authorization":  "Bearer " + token]
         
         Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).responseJSON { (response) in
             if response.error != nil {
@@ -67,7 +70,7 @@ class APIDownloader {
 
                 if var user = self.unparseJSON(json: json, with: login) {
         
-                    self.downloadProjects(with: user.id, completion: { (response) in
+                    self.downloadProjects(with: user.id, with: token, completion: { (response) in
                         switch response {
                         case .success(let downloadedData):
                             let projects = downloadedData as! [Project]
@@ -91,13 +94,13 @@ class APIDownloader {
     }
 
     
-    private func downloadProjects(with userId: Int, completion: @escaping (Response) -> Void) {
+    private func downloadProjects(with userId: Int, with token: String, completion: @escaping (Response) -> Void) {
 
         guard let url = URL(string: "https://api.intra.42.fr/v2/projects_users?user_id=\(userId)&page[size]=100") else {
             completion(.error("You have used restricted symbols/language!"))
             return
         }
-        let header: HTTPHeaders = ["Authorization":  "Bearer " + APIData.token]
+        let header: HTTPHeaders = ["Authorization":  "Bearer " + token]
         
         Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).responseJSON { (response) in
             if response.error != nil {

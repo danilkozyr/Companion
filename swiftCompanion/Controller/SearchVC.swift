@@ -24,17 +24,57 @@ class SearchVC: UIViewController {
         view.setGradientColor(colorOne: UIColor(red: 4/255, green: 4/255, blue: 9/255, alpha: 1.0),
                               colorTwo: UIColor(red: 48/255, green: 43/255, blue: 99/255, alpha: 1.0),
                               startPosition: CGPoint(x: 0, y: 0))
-        getAPIToken()
+    }
+
+    private func searchUser(with login: String, with token: String) {
+        api.downloadUser(with: login, token: token) { [unowned self] result in
+            switch result {
+            case .success(let get):
+                DispatchQueue.main.async {
+                    let user = get as! User
+                    self.showUser(user: user)
+                }
+            case .error(let error):
+                DispatchQueue.main.async {
+                    self.showError(message: error)
+                }
+            }
+        }
     }
     
-    private func getAPIToken() {
-        api.authorizeApplication(failure: { [unowned self] error in
-            DispatchQueue.main.sync {
-                let alert = UIAlertController().returnAlert(title: "You are not connected to the Internet", message: error, action: "OK")
-                self.present(alert, animated: true)
-            }
-        })
+    private func showUser(user: User) {
+        activityIndicator.stopAnimating()
+        activityIndicator.isHidden = true
+        view.isUserInteractionEnabled = true
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+        let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "UserVCID") as! UserVC
+        nextVC.user = user
+        navigationController?.pushViewController(nextVC, animated: true)
     }
+    
+    private func showError(message: String) {
+        let alert = UIAlertController().returnAlert(title: "Error", message: message, action: "OK")
+        if UserDefaults.standard.string(forKey: LocalKeys.topicKey) != nil {
+            UserDefaults.standard.removeObject(forKey: LocalKeys.topicKey)
+        }
+        activityIndicator.isHidden = true
+        view.isUserInteractionEnabled = true
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+        activityIndicator.stopAnimating()
+        present(alert, animated: true)
+    }
+    
+    private func checkIfLocalDataExpired() {
+        let defaults = UserDefaults.standard
+        let date = Date()
+        if let dateExpired = defaults.object(forKey: LocalKeys.dateExpired) as? Date {
+            if date > dateExpired {
+                defaults.removeObject(forKey: LocalKeys.dateExpired)
+                defaults.removeObject(forKey: LocalKeys.topicKey)
+            }
+        }
+    }
+    
 }
 
 
@@ -42,41 +82,31 @@ extension SearchVC: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         
-        guard APIData.token != "" else {
-            return false
-        }
-        
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         activityIndicator.isHidden = false
         activityIndicator.startAnimating()
         view.isUserInteractionEnabled = false
-        
+        checkIfLocalDataExpired()
         var login = textField.text?.replacingOccurrences(of: " ", with: "")
         login = login?.lowercased()
-        api.downloadUser(with: login!) { [unowned self] result in
-            switch result {
-            case .success(let get):
-                DispatchQueue.main.async {
-                    let user = get as! User
-                    self.activityIndicator.stopAnimating()
-                    self.activityIndicator.isHidden = true
-                    self.view.isUserInteractionEnabled = true
-                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
-                    let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "UserVCID") as! UserVC
-                    nextVC.user = user
-                    self.navigationController?.pushViewController(nextVC, animated: true)
-                }
-            case .error(let error):
-                DispatchQueue.main.async {
-                    let alert = UIAlertController().returnAlert(title: "Error", message: error, action: "OK")
-                    self.activityIndicator.isHidden = true
-                    self.view.isUserInteractionEnabled = true
-                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
-                    self.activityIndicator.stopAnimating()
+        let defaults = UserDefaults.standard
+        if let token = defaults.string(forKey: LocalKeys.topicKey) {
+            searchUser(with: login!, with: token)
+        } else {
+            
+            api.authorizeApplication { result in
+                switch result {
+                case .success(let token):
+                    let dateExpired = Date(timeIntervalSinceNow: TimeInterval(exactly: 7200)!)
+                    defaults.set(token, forKey: LocalKeys.topicKey)
+                    defaults.set(dateExpired, forKey: LocalKeys.dateExpired)
+                    self.searchUser(with: login!, with: token as! String)
+                case .error(let error):
+                    let alert = UIAlertController().returnAlert(title: "You are not connected to the Internet", message: error, action: "OK")
                     self.present(alert, animated: true)
                 }
-
             }
+            
         }
         
         return true
