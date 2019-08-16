@@ -8,8 +8,6 @@
 
 import Foundation
 
-import Foundation
-
 struct LocalKeys {
     static let topicKey = "topicInfo"
     static let dateExpired = "dateExpired"

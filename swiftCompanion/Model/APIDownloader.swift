@@ -12,15 +12,15 @@ import Alamofire
 
 class APIDownloader {
     
-    private let client_id: String = "dbca5241fdb6c9a667455675619a0d57fa51c7ba40b6830809583391331c8531"
-    private let client_secret: String = "dfe4854420649742f35b472bd112a83b1b794b9ebf1611fec4f202825127bd49"
-    
     enum Response {
         case success(Any)
         case error(String)
     }
     
-    func authorizeApplication(completion: @escaping (Response) -> Void) {
+    static func authorizeApplication(completion: @escaping (Response) -> Void) {
+        let client_id: String = "dbca5241fdb6c9a667455675619a0d57fa51c7ba40b6830809583391331c8531"
+        let client_secret: String = "dfe4854420649742f35b472bd112a83b1b794b9ebf1611fec4f202825127bd49"
+        
         guard let url = URL(string: "https://api.intra.42.fr/oauth/token") else {
             completion(.error("Check Internet Connection"))
             return
@@ -47,7 +47,7 @@ class APIDownloader {
         })
     }
 
-    func downloadUser(with login: String, token: String, completion: @escaping (Response) -> Void) {
+    static func downloadUser(with login: String, token: String, completion: @escaping (Response) -> Void) {
         guard let url = URL(string: "https://api.intra.42.fr/v2/users/" + login) else {
             completion(.error("You have used restricted symbols/language!"))
             return
@@ -68,9 +68,9 @@ class APIDownloader {
                     return
                 }
 
-                if var user = self.unparseJSON(json: json, with: login) {
+                if var user = APIDownloader().unparseJSON(json: json, with: login) {
         
-                    self.downloadProjects(with: user.id, with: token, completion: { (response) in
+                    APIDownloader().downloadProjects(with: user.id, with: token, completion: { (response) in
                         switch response {
                         case .success(let downloadedData):
                             let projects = downloadedData as! [Project]
@@ -93,7 +93,6 @@ class APIDownloader {
         
     }
 
-    
     private func downloadProjects(with userId: Int, with token: String, completion: @escaping (Response) -> Void) {
 
         guard let url = URL(string: "https://api.intra.42.fr/v2/projects_users?user_id=\(userId)&page[size]=100") else {

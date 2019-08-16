@@ -28,9 +28,19 @@ class UserVC: UIViewController {
         }
     }
     
+    deinit {
+        user = nil
+        tableView = nil
+        title = nil
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = user!.login + "'s profile"
+        if let login = user?.login {
+            self.title = login + "'s profile"
+        } else {
+            self.title = "Profile"
+        }
 
         view.setGradientColor(colorOne: UIColor(red: 4/255, green: 4/255, blue: 9/255, alpha: 1.0),
                             colorTwo: UIColor(red: 48/255, green: 43/255, blue: 99/255, alpha: 1.0),

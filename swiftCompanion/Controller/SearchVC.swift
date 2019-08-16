@@ -10,7 +10,6 @@ import UIKit
 
 class SearchVC: UIViewController {
 
-    private var api = APIDownloader()
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var textField: UITextField!
     
@@ -27,16 +26,16 @@ class SearchVC: UIViewController {
     }
 
     private func searchUser(with login: String, with token: String) {
-        api.downloadUser(with: login, token: token) { [unowned self] result in
+        APIDownloader.downloadUser(with: login, token: token) { [weak self] result in
             switch result {
             case .success(let get):
+                let user = get as! User
                 DispatchQueue.main.async {
-                    let user = get as! User
-                    self.showUser(user: user)
+                    self?.showUser(user: user)
                 }
             case .error(let error):
                 DispatchQueue.main.async {
-                    self.showError(message: error)
+                    self?.showError(message: error)
                 }
             }
         }
@@ -87,23 +86,22 @@ extension SearchVC: UITextFieldDelegate {
         activityIndicator.startAnimating()
         view.isUserInteractionEnabled = false
         checkIfLocalDataExpired()
-        var login = textField.text?.replacingOccurrences(of: " ", with: "")
-        login = login?.lowercased()
+        let login = textField.text?.replacingOccurrences(of: " ", with: "").lowercased()
         let defaults = UserDefaults.standard
         if let token = defaults.string(forKey: LocalKeys.topicKey) {
             searchUser(with: login!, with: token)
         } else {
             
-            api.authorizeApplication { result in
+            APIDownloader.authorizeApplication { [weak self] result in
                 switch result {
                 case .success(let token):
                     let dateExpired = Date(timeIntervalSinceNow: TimeInterval(exactly: 7200)!)
                     defaults.set(token, forKey: LocalKeys.topicKey)
                     defaults.set(dateExpired, forKey: LocalKeys.dateExpired)
-                    self.searchUser(with: login!, with: token as! String)
+                    self?.searchUser(with: login!, with: token as! String)
                 case .error(let error):
                     let alert = UIAlertController().returnAlert(title: "You are not connected to the Internet", message: error, action: "OK")
-                    self.present(alert, animated: true)
+                    self?.present(alert, animated: true)
                 }
             }
             
