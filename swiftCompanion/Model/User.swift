@@ -58,4 +58,8 @@ class User {
         self.projects = projects
     }
     
+    deinit {
+        print("user deinited")
+    }
+    
 }

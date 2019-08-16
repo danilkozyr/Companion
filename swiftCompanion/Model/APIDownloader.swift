@@ -68,7 +68,7 @@ class APIDownloader {
                     return
                 }
 
-                if var user = APIDownloader().unparseJSON(json: json, with: login) {
+                if let user = APIDownloader().unparseJSON(json: json, with: login) {
         
                     APIDownloader().downloadProjects(with: user.id, with: token, completion: { (response) in
                         switch response {

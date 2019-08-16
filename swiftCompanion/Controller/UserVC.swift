@@ -28,12 +28,6 @@ class UserVC: UIViewController {
         }
     }
     
-    deinit {
-        user = nil
-        tableView = nil
-        title = nil
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         if let login = user?.login {
