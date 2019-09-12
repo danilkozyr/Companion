@@ -26,7 +26,7 @@ class NetworkDataFetcher {
                 completion(nil, error)
                 return
             }
-           
+            
             let decoded = DecoderJSON().decode(type: T.self, data: data)
             completion(decoded, nil)
         }

@@ -6,8 +6,6 @@
 //  Copyright © 2019 Daniil KOZYR. All rights reserved.
 //
 
-// TODO: Last Location
-
 import UIKit
 
 class UserVC: UIViewController {
@@ -38,6 +36,25 @@ class UserVC: UIViewController {
                             colorTwo: UIColor(red: 48/255, green: 43/255, blue: 99/255, alpha: 1.0),
                             startPosition: CGPoint(x: 0, y: 0))
         downloadProjects()
+        
+        if user.location == nil {
+            downloadLastLocation()
+        }
+        
+    }
+    
+    private func downloadLastLocation() {
+        DataFetcherService().fetchLocations(user: user, token: token, completion: { [weak self] (locations, error) in
+            guard let locations = locations, error == nil else {
+                return
+            }
+            
+            let location = locations.first
+            let date = location?.endAt!.transformToDate()
+            let lastLoc = date?.timeAgoDisplay()
+            self?.user.location = lastLoc!
+            
+        })
     }
     
     private func downloadProjects() {

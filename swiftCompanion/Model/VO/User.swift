@@ -21,7 +21,7 @@ struct User: Decodable {
     let correctionPoint: Int
     let poolMonth: String
     let poolYear: String
-    let location: String?
+    var location: String?
     let wallet: Int
     let campus: [Campus]
     let cursusUsers: [CursusUsers]
@@ -29,11 +29,7 @@ struct User: Decodable {
     lazy var poolDate: String = {
         return "\(self.poolMonth), \(self.poolYear)"
     }()
-    
-    lazy var placeMarvin: String = {
-        return self.location == nil ? "unavailable" : self.location!
-    }()
-        
+       
 }
 
 struct Campus: Decodable {
@@ -69,3 +65,10 @@ struct Project: Decodable {
     let slug: String
     let parentId: Int?
 }
+
+struct Location: Decodable {
+    let endAt: String?
+    let beginAt: String
+ 
+}
+

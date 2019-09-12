@@ -82,7 +82,6 @@ extension SearchVC: UITextFieldDelegate {
         let fetcher = DataFetcherService()
         fetcher.fetchToken { [weak self] (token, error) in
             guard let token = token, error == nil else { return }
-            
             self?.token = token.accessToken
             self?.searchUser(with: login!, with: token.accessToken)
         }

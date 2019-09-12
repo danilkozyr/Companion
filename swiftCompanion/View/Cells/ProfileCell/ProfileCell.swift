@@ -43,7 +43,7 @@ class ProfileCell: UITableViewCell {
         self.wallet.text = "Wallet: \(user.wallet)"
         self.corrections.text = "Corrections: \(user.correctionPoint)"
         self.pool.text = user.poolDate
-        self.place.text = user.placeMarvin
+        self.place.text = user.location
         
         let levelFloat = user.cursusUsers.first!.level
         var levelString = String(levelFloat).split(separator: ".")
