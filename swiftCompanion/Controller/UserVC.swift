@@ -12,7 +12,9 @@ import UIKit
 
 class UserVC: UIViewController {
 
-    var user: User?
+    var user: User!
+    var projectUsers: [ProjectUsers] = []
+    var token: String!
     
     @IBOutlet weak var tableView: UITableView! {
         didSet {
@@ -30,16 +32,45 @@ class UserVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let login = user?.login {
-            self.title = login + "'s profile"
-        } else {
-            self.title = "Profile"
-        }
+        self.title = user.login + "'s profile"
 
         view.setGradientColor(colorOne: UIColor(red: 4/255, green: 4/255, blue: 9/255, alpha: 1.0),
                             colorTwo: UIColor(red: 48/255, green: 43/255, blue: 99/255, alpha: 1.0),
                             startPosition: CGPoint(x: 0, y: 0))
+        downloadProjects()
     }
+    
+    private func downloadProjects() {
+        
+        let fetcher = DataFetcherService()
+        
+        fetcher.fetchProjects(user: user, token: token) { [weak self] (projects, error) in
+            guard let projects = projects, error == nil else {
+                return
+            }
+
+            let new = self?.getProjects(projects: projects)
+            self?.projectUsers = new!
+            self?.tableView.reloadData()
+        }
+        
+    }
+    
+    private func getProjects(projects: [ProjectUsers]) -> [ProjectUsers] {
+        
+        let schoolProjects = projects.filter( {  $0.cursusIds.contains(1) && $0.project.parentId == nil && $0.project.name != "Rushes" } )
+        
+        if schoolProjects.isEmpty {
+            return projects.filter( { $0.cursusIds.contains(4) && $0.project.parentId == nil })
+        }
+    
+        return schoolProjects
+    }
+    
+    deinit {
+        print("UserVC is deinited")
+    }
+    
 }
 
 extension UserVC: UITableViewDataSource {
@@ -51,9 +82,9 @@ extension UserVC: UITableViewDataSource {
         if section == 0 {
             return 1
         } else if section == 1 {
-            return user!.projects!.isEmpty ? 0 : user!.projects!.count + 1
+            return projectUsers.isEmpty ? 0 : projectUsers.count + 1
         } else {
-            return user!.skills.isEmpty ? 0 : user!.skills.count + 1
+            return user.cursusUsers.first!.skills.isEmpty ? 0 : user.cursusUsers.first!.skills.count + 1
         }
     }
     
@@ -61,30 +92,8 @@ extension UserVC: UITableViewDataSource {
         
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "profileCell") as! ProfileCell
-            
-            cell.backgroundColor = .clear
-            cell.profileImage.downloaded(from: URL(string: user!.imageUrl)!)
-            cell.fullName.text = user!.firstName + " " + user!.lastName
-            cell.location.text = user!.location
-            cell.phone.text = user!.email
-            cell.wallet.text = "Wallet: \(user!.wallet)"
-            cell.corrections.text = "Corrections: \(user!.correctionPoints)"
-            cell.pool.text = user!.poolDate
-            if user?.place == nil {
-                cell.place.text = "unavailable"
-            } else {
-                cell.place.text = user!.place
-            }
-            
-            var level = user!.level.split(separator: ".")
-            if level.isEmpty {
-                cell.levelProgress.isHidden = true
-                cell.level.text = "Pool Coder"
-            } else {
-                cell.level.text = "Level \(level[0]) - \(level[1])%"
-                level[1] = "0." + level[1]
-                cell.levelProgress.progress = Float(level[1])!
-            }
+
+            cell.configureCell(user: user)
             
             return cell
         } else if indexPath.section == 1 {
@@ -95,23 +104,8 @@ extension UserVC: UITableViewDataSource {
             }
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "projectCell") as! ProjectCell
-            let project = user?.projects![indexPath.row - 1]
-            cell.projectName.text = project?.name
-            guard project?.grade != nil else {
-                cell.projectGrade.text = ""
-                cell.projectName.textColor = .white
-                cell.projectGrade.textColor = .white
-                
-                return cell
-            }
-            
-            cell.projectGrade.text = project?.grade
-            
-            if (Int(cell.projectGrade.text!)! >= 75) {
-                cell.projectGrade.textColor = UIColor(red: 80/255, green: 220/255, blue: 100/255, alpha: 1.0)
-            } else {
-                cell.projectGrade.textColor = UIColor(red: 240/255, green: 128/255, blue: 128/255, alpha: 1.0)
-            }
+            let projectUser = projectUsers[indexPath.row - 1]
+            cell.configureCell(projectUser: projectUser)
             
             return cell
         } else {
@@ -122,11 +116,9 @@ extension UserVC: UITableViewDataSource {
             }
             let cell = tableView.dequeueReusableCell(withIdentifier: "skillCell") as! SkillCell
 
-            let skill = (user?.skills[indexPath.row - 1])!
-            cell.skillName.text = "\(skill.name) - level: \(skill.level)"
-            cell.skillProgress.transform = CGAffineTransform(scaleX: 1, y: 2)
-            cell.skillProgress.progress = Float(skill.level)! / 10.0
-
+            let skill = (user.cursusUsers.first?.skills[indexPath.row - 1])!
+            cell.configureCell(skill: skill)
+            
             return cell
 
         }
