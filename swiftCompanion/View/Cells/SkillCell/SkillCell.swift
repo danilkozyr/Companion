@@ -10,8 +10,10 @@ import UIKit
 
 class SkillCell: UITableViewCell {
 
-    @IBOutlet weak var skillName: UILabel!   
-    @IBOutlet weak var skillProgress: UIProgressView!
+    @IBOutlet private weak var skillName: UILabel!
+    @IBOutlet private weak var skillProgress: UIProgressView!
+    
+    static let identifier = "skillCell"
     
     func configureCell(skill: Skill) {
         self.skillName.text = "\(skill.name) - level: \(skill.level)"

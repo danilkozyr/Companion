@@ -10,14 +10,16 @@ import UIKit
 
 class ProfileCell: UITableViewCell {
 
-    @IBOutlet weak var fullName: UILabel!
-    @IBOutlet weak var phone: UILabel!
-    @IBOutlet weak var place: UILabel!
-    @IBOutlet weak var location: UILabel!
-    @IBOutlet weak var pool: UILabel!
-    @IBOutlet weak var corrections: UILabel!
-    @IBOutlet weak var wallet: UILabel!
-    @IBOutlet weak var level: UILabel!
+    @IBOutlet private weak var fullName: UILabel!
+    @IBOutlet private weak var phone: UILabel!
+    @IBOutlet private weak var place: UILabel!
+    @IBOutlet private weak var location: UILabel!
+    @IBOutlet private weak var pool: UILabel!
+    @IBOutlet private weak var corrections: UILabel!
+    @IBOutlet private weak var wallet: UILabel!
+    @IBOutlet private weak var level: UILabel!
+    
+    static let identifier = "profileCell"
     
     @IBOutlet weak var levelProgress: UIProgressView! {
         didSet {
@@ -45,7 +47,16 @@ class ProfileCell: UITableViewCell {
         self.pool.text = user.poolDate
         self.place.text = user.location
         
-        let levelFloat = user.cursusUsers.first!.level
+        let levelFloat: Float
+        
+        if let level = user.cursusUsers.filter( { $0.cursusId == 1 } ).first?.level {
+            levelFloat = level
+        } else if let level = user.cursusUsers.filter( { $0.cursusId == 4 } ).first?.level {
+            levelFloat = level
+        } else {
+            levelFloat = 0.0
+        }
+        
         var levelString = String(levelFloat).split(separator: ".")
         
         self.level.text = "Level \(levelString[0]) - \(levelString[1])%"

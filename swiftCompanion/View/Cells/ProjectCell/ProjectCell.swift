@@ -10,9 +10,10 @@ import UIKit
 
 class ProjectCell: UITableViewCell {
     
-    @IBOutlet weak var projectName: UILabel!
-    @IBOutlet weak var projectGrade: UILabel!
- 
+    @IBOutlet private weak var projectName: UILabel!
+    @IBOutlet private weak var projectGrade: UILabel!
+    
+    static let identifier = "projectCell"
     
     func configureCell(projectUser: ProjectUsers) {
         self.projectName.text = projectUser.project.name

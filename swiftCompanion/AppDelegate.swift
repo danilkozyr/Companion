@@ -8,14 +8,6 @@
 
 import UIKit
 
-extension UIApplication {
-    
-    var statusBarView: UIView? {
-        return value(forKey: "statusBar") as? UIView
-    }
-    
-}
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -29,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().isTranslucent = true
         UINavigationBar.appearance().tintColor = .white
         UINavigationBar.appearance().backgroundColor = .clear
-        UIApplication.shared.statusBarView?.backgroundColor = .clear
+//        UIApplication.shared.statusBarView?.backgroundColor = .clear
         return true
     }
 

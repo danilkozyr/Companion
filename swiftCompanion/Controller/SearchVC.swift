@@ -10,18 +10,23 @@ import UIKit
 
 class SearchVC: UIViewController {
 
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var textField: UITextField!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView! {
+        didSet {
+            activityIndicator.isHidden = true
+            activityIndicator.stopAnimating()
+        }
+    }
+    
+    @IBOutlet weak var textField: UITextField! {
+        didSet {
+            textField.delegate = self
+        }
+    }
     
     var token: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        textField.delegate = self
-        activityIndicator.isHidden = true
-        activityIndicator.stopAnimating()
-        
         view.setGradientColor(colorOne: UIColor(red: 4/255, green: 4/255, blue: 9/255, alpha: 1.0),
                               colorTwo: UIColor(red: 48/255, green: 43/255, blue: 99/255, alpha: 1.0),
                               startPosition: CGPoint(x: 0, y: 0))
@@ -42,7 +47,6 @@ class SearchVC: UIViewController {
             }
             
             self?.showNextVC(user: user, token: token)
-
         }
     }
     
@@ -81,7 +85,10 @@ extension SearchVC: UITextFieldDelegate {
 
         let fetcher = DataFetcherService()
         fetcher.fetchToken { [weak self] (token, error) in
-            guard let token = token, error == nil else { return }
+            guard let token = token, error == nil else {
+                return
+            }
+            
             self?.token = token.accessToken
             self?.searchUser(with: login!, with: token.accessToken)
         }

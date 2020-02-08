@@ -21,11 +21,6 @@ class DataFetcherService {
         networkDataFetcher.fetchData(urlString: url, token: token, completion: completion)
     }
     
-    func fetchProjects(user: User, token: String, completion: @escaping ([ProjectUsers]?, Error?) -> Void) {
-        let url = "https://api.intra.42.fr/v2/users/\(user.id)/projects_users?page[size]=100"
-        networkDataFetcher.fetchData(urlString: url, token: token, completion: completion)
-    }
-    
     func fetchLocations(user: User, token: String, completion: @escaping ([Location]?, Error?) -> Void) {
         let url = "https://api.intra.42.fr/v2/users/\(user.id)/locations?sort=-end_at"
         networkDataFetcher.fetchData(urlString: url, token: token, completion: completion)

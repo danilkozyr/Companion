@@ -16,7 +16,6 @@
 		557ACA0C232AAB2F00EA188D /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557ACA0B232AAB2F00EA188D /* UIImageView.swift */; };
 		557ACA0E232AAB4700EA188D /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557ACA0D232AAB4700EA188D /* UIView.swift */; };
 		557ACA10232AAB5B00EA188D /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557ACA0F232AAB5B00EA188D /* Date.swift */; };
-		557ACA12232AAB7700EA188D /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557ACA11232AAB7700EA188D /* UINavigationController.swift */; };
 		557ACA14232AAB8900EA188D /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557ACA13232AAB8900EA188D /* String.swift */; };
 		557ACA16232AAB9400EA188D /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557ACA15232AAB9400EA188D /* Double.swift */; };
 		557ACA18232AABA000EA188D /* UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557ACA17232AABA000EA188D /* UIAlertController.swift */; };
@@ -47,7 +46,6 @@
 		557ACA0B232AAB2F00EA188D /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		557ACA0D232AAB4700EA188D /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		557ACA0F232AAB5B00EA188D /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
-		557ACA11232AAB7700EA188D /* UINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
 		557ACA13232AAB8900EA188D /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		557ACA15232AAB9400EA188D /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
 		557ACA17232AABA000EA188D /* UIAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertController.swift; sourceTree = "<group>"; };
@@ -183,7 +181,6 @@
 				557ACA13232AAB8900EA188D /* String.swift */,
 				557ACA17232AABA000EA188D /* UIAlertController.swift */,
 				557ACA0B232AAB2F00EA188D /* UIImageView.swift */,
-				557ACA11232AAB7700EA188D /* UINavigationController.swift */,
 				557ACA0D232AAB4700EA188D /* UIView.swift */,
 			);
 			path = Extensions;
@@ -377,7 +374,6 @@
 				5E61F0BD22FEC9FA0059103C /* RoundedView.swift in Sources */,
 				557ACA18232AABA000EA188D /* UIAlertController.swift in Sources */,
 				5E61F0C522FEDD3A0059103C /* SectionCell.swift in Sources */,
-				557ACA12232AAB7700EA188D /* UINavigationController.swift in Sources */,
 				55E37A3D22DCA03F00342D9C /* SkillCell.swift in Sources */,
 				557ACA08232A7C1500EA188D /* Token.swift in Sources */,
 				55E37A4222DCACE400342D9C /* ProjectCell.swift in Sources */,

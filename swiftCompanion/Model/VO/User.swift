@@ -25,11 +25,11 @@ struct User: Decodable {
     let wallet: Int
     let campus: [Campus]
     let cursusUsers: [CursusUsers]
+    let projectsUsers: [ProjectUsers]
 
     lazy var poolDate: String = {
         return "\(self.poolMonth), \(self.poolYear)"
     }()
-       
 }
 
 struct Campus: Decodable {

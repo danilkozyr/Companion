@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import SwiftyJSON
 
 typealias DataFetchHandler<T> = (T?, Error?) -> Void
 typealias Parameters = [String: Any]
