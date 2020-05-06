@@ -1,6 +1,0 @@
-framework module Pods_swiftCompanion {
-  umbrella header "Pods-swiftCompanion-umbrella.h"
-
-  export *
-  module * { export * }
-}
