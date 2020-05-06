@@ -7,6 +7,7 @@ target 'swiftCompanion' do
 
   # Pods for swiftCompanion
 pod 'Alamofire'
-pod 'SwiftyJSON'
+pod 'BrightFutures'
+pod 'RealmSwift'
 
 end

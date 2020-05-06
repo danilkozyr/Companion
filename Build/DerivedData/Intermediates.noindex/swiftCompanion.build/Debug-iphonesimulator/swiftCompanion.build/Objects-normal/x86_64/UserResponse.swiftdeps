@@ -1,0 +1,266 @@
+### Swift dependencies file v0 ###
+provides-top-level:
+- "UserResponse"
+- "Campus"
+- "CursusUsers"
+- "Skill"
+- "ProjectUsers"
+- "Project"
+- "Location"
+provides-nominal:
+- "14swiftCompanion12UserResponseV"
+- "14swiftCompanion6CampusV"
+- "14swiftCompanion11CursusUsersV"
+- "14swiftCompanion5SkillV"
+- "14swiftCompanion12ProjectUsersV"
+- "14swiftCompanion7ProjectV"
+- "14swiftCompanion8LocationV"
+provides-member:
+- ["14swiftCompanion12UserResponseV", ""]
+- ["14swiftCompanion6CampusV", ""]
+- ["14swiftCompanion11CursusUsersV", ""]
+- ["14swiftCompanion5SkillV", ""]
+- ["14swiftCompanion12ProjectUsersV", ""]
+- ["14swiftCompanion7ProjectV", ""]
+- ["14swiftCompanion8LocationV", ""]
+provides-dynamic-lookup:
+depends-top-level:
+- "=="
+- "Bool"
+- "Campus"
+- "CursusUsers"
+- "Decodable"
+- "Float"
+- !private "FloatLiteralType"
+- "Int"
+- !private "IntegerLiteralType"
+- "Location"
+- "Project"
+- "ProjectUsers"
+- "Skill"
+- "String"
+- !private "StringLiteralType"
+- "UserResponse"
+- !private "~="
+depends-member:
+- ["14swiftCompanion6CampusV", "String"]
+- ["14swiftCompanion6CampusV", "city"]
+- ["14swiftCompanion6CampusV", "country"]
+- ["14swiftCompanion6CampusV", "deinit"]
+- ["14swiftCompanion6CampusV", "init"]
+- ["14swiftCompanion6CampusV", "name"]
+- ["s9CodingKeyP", "=="]
+- !private ["s9CodingKeyP", ""]
+- ["s9CodingKeyP", "_rawHashValue"]
+- ["s9CodingKeyP", "debugDescription"]
+- ["s9CodingKeyP", "description"]
+- ["s9CodingKeyP", "hash"]
+- ["s9CodingKeyP", "hashValue"]
+- ["s9CodingKeyP", "init"]
+- ["s9CodingKeyP", "intValue"]
+- ["s9CodingKeyP", "stringValue"]
+- ["14swiftCompanion11CursusUsersV", "Float"]
+- ["14swiftCompanion11CursusUsersV", "Int"]
+- ["14swiftCompanion11CursusUsersV", "Skill"]
+- ["14swiftCompanion11CursusUsersV", "cursusId"]
+- ["14swiftCompanion11CursusUsersV", "deinit"]
+- ["14swiftCompanion11CursusUsersV", "init"]
+- ["14swiftCompanion11CursusUsersV", "level"]
+- ["14swiftCompanion11CursusUsersV", "skills"]
+- ["s28CustomDebugStringConvertibleP", "=="]
+- !private ["s28CustomDebugStringConvertibleP", ""]
+- ["s28CustomDebugStringConvertibleP", "_rawHashValue"]
+- ["s28CustomDebugStringConvertibleP", "debugDescription"]
+- ["s28CustomDebugStringConvertibleP", "description"]
+- ["s28CustomDebugStringConvertibleP", "hash"]
+- ["s28CustomDebugStringConvertibleP", "hashValue"]
+- ["s28CustomDebugStringConvertibleP", "init"]
+- ["s28CustomDebugStringConvertibleP", "intValue"]
+- ["s28CustomDebugStringConvertibleP", "stringValue"]
+- ["s23CustomStringConvertibleP", "=="]
+- !private ["s23CustomStringConvertibleP", ""]
+- ["s23CustomStringConvertibleP", "_rawHashValue"]
+- ["s23CustomStringConvertibleP", "debugDescription"]
+- ["s23CustomStringConvertibleP", "description"]
+- ["s23CustomStringConvertibleP", "hash"]
+- ["s23CustomStringConvertibleP", "hashValue"]
+- ["s23CustomStringConvertibleP", "init"]
+- ["s23CustomStringConvertibleP", "intValue"]
+- ["s23CustomStringConvertibleP", "stringValue"]
+- ["Se", ""]
+- !private ["Se", "beginAt"]
+- !private ["Se", "campus"]
+- !private ["Se", "city"]
+- !private ["Se", "correctionPoint"]
+- !private ["Se", "country"]
+- !private ["Se", "cursusId"]
+- !private ["Se", "cursusIds"]
+- !private ["Se", "cursusUsers"]
+- !private ["Se", "displayname"]
+- !private ["Se", "email"]
+- !private ["Se", "endAt"]
+- !private ["Se", "finalMark"]
+- !private ["Se", "firstName"]
+- !private ["Se", "id"]
+- !private ["Se", "imageUrl"]
+- ["Se", "init"]
+- !private ["Se", "lastName"]
+- !private ["Se", "level"]
+- !private ["Se", "location"]
+- !private ["Se", "login"]
+- !private ["Se", "name"]
+- !private ["Se", "parentId"]
+- !private ["Se", "phone"]
+- !private ["Se", "poolMonth"]
+- !private ["Se", "poolYear"]
+- !private ["Se", "project"]
+- !private ["Se", "projectsUsers"]
+- !private ["Se", "skills"]
+- !private ["Se", "slug"]
+- !private ["Se", "staff"]
+- !private ["Se", "wallet"]
+- !private ["s7DecoderP", "container"]
+- ["SQ", "=="]
+- !private ["SQ", ""]
+- ["SQ", "_rawHashValue"]
+- ["SQ", "debugDescription"]
+- ["SQ", "description"]
+- ["SQ", "hash"]
+- ["SQ", "hashValue"]
+- ["SQ", "init"]
+- ["SQ", "intValue"]
+- ["SQ", "stringValue"]
+- ["SH", "=="]
+- !private ["SH", ""]
+- ["SH", "_rawHashValue"]
+- ["SH", "debugDescription"]
+- ["SH", "description"]
+- ["SH", "hash"]
+- ["SH", "hashValue"]
+- ["SH", "init"]
+- ["SH", "intValue"]
+- ["SH", "stringValue"]
+- !private ["s6HasherV", "combine"]
+- !private ["s22KeyedDecodingContainerV", "decode"]
+- !private ["s22KeyedDecodingContainerV", "decodeIfPresent"]
+- !private ["s30KeyedDecodingContainerProtocolP", "decode"]
+- !private ["s30KeyedDecodingContainerProtocolP", "decodeIfPresent"]
+- ["14swiftCompanion8LocationV", "String"]
+- ["14swiftCompanion8LocationV", "beginAt"]
+- ["14swiftCompanion8LocationV", "deinit"]
+- ["14swiftCompanion8LocationV", "endAt"]
+- ["14swiftCompanion8LocationV", "init"]
+- ["14swiftCompanion7ProjectV", "Int"]
+- ["14swiftCompanion7ProjectV", "String"]
+- ["14swiftCompanion7ProjectV", "deinit"]
+- ["14swiftCompanion7ProjectV", "init"]
+- ["14swiftCompanion7ProjectV", "name"]
+- ["14swiftCompanion7ProjectV", "parentId"]
+- ["14swiftCompanion7ProjectV", "slug"]
+- ["14swiftCompanion12ProjectUsersV", "Int"]
+- ["14swiftCompanion12ProjectUsersV", "Project"]
+- ["14swiftCompanion12ProjectUsersV", "cursusIds"]
+- ["14swiftCompanion12ProjectUsersV", "deinit"]
+- ["14swiftCompanion12ProjectUsersV", "finalMark"]
+- ["14swiftCompanion12ProjectUsersV", "id"]
+- ["14swiftCompanion12ProjectUsersV", "init"]
+- ["14swiftCompanion12ProjectUsersV", "project"]
+- ["14swiftCompanion5SkillV", "Float"]
+- ["14swiftCompanion5SkillV", "String"]
+- ["14swiftCompanion5SkillV", "deinit"]
+- ["14swiftCompanion5SkillV", "init"]
+- ["14swiftCompanion5SkillV", "level"]
+- ["14swiftCompanion5SkillV", "name"]
+- ["14swiftCompanion12UserResponseV", "Bool"]
+- ["14swiftCompanion12UserResponseV", "Campus"]
+- ["14swiftCompanion12UserResponseV", "CursusUsers"]
+- ["14swiftCompanion12UserResponseV", "Int"]
+- ["14swiftCompanion12UserResponseV", "ProjectUsers"]
+- ["14swiftCompanion12UserResponseV", "String"]
+- ["14swiftCompanion12UserResponseV", "campus"]
+- ["14swiftCompanion12UserResponseV", "correctionPoint"]
+- ["14swiftCompanion12UserResponseV", "cursusUsers"]
+- ["14swiftCompanion12UserResponseV", "deinit"]
+- ["14swiftCompanion12UserResponseV", "displayname"]
+- ["14swiftCompanion12UserResponseV", "email"]
+- ["14swiftCompanion12UserResponseV", "firstName"]
+- ["14swiftCompanion12UserResponseV", "id"]
+- ["14swiftCompanion12UserResponseV", "imageUrl"]
+- ["14swiftCompanion12UserResponseV", "init"]
+- ["14swiftCompanion12UserResponseV", "lastName"]
+- ["14swiftCompanion12UserResponseV", "location"]
+- ["14swiftCompanion12UserResponseV", "login"]
+- ["14swiftCompanion12UserResponseV", "phone"]
+- ["14swiftCompanion12UserResponseV", "poolMonth"]
+- ["14swiftCompanion12UserResponseV", "poolYear"]
+- ["14swiftCompanion12UserResponseV", "projectsUsers"]
+- ["14swiftCompanion12UserResponseV", "staff"]
+- ["14swiftCompanion12UserResponseV", "wallet"]
+depends-nominal:
+- "14swiftCompanion6CampusV"
+- "s9CodingKeyP"
+- "14swiftCompanion11CursusUsersV"
+- "s28CustomDebugStringConvertibleP"
+- "s23CustomStringConvertibleP"
+- "Se"
+- !private "s7DecoderP"
+- "SQ"
+- "SH"
+- !private "s6HasherV"
+- !private "s22KeyedDecodingContainerV"
+- !private "s30KeyedDecodingContainerProtocolP"
+- "14swiftCompanion8LocationV"
+- "14swiftCompanion7ProjectV"
+- "14swiftCompanion12ProjectUsersV"
+- "14swiftCompanion5SkillV"
+- "14swiftCompanion12UserResponseV"
+depends-dynamic-lookup:
+depends-external:
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator13.2.sdk/usr/lib/swift/ObjectiveC.swiftmodule/x86_64.swiftinterface"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator13.2.sdk/usr/lib/swift/CoreImage.swiftmodule/x86_64.swiftinterface"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator13.2.sdk/usr/lib/swift/QuartzCore.swiftmodule/x86_64.swiftinterface"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator13.2.sdk/usr/lib/swift/Dispatch.swiftmodule/x86_64.swiftinterface"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator13.2.sdk/usr/lib/swift/Metal.swiftmodule/x86_64.swiftinterface"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator13.2.sdk/usr/lib/swift/Darwin.swiftmodule/x86_64.swiftinterface"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator13.2.sdk/usr/lib/swift/Foundation.swiftmodule/x86_64.swiftinterface"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator13.2.sdk/usr/lib/swift/CoreFoundation.swiftmodule/x86_64.swiftinterface"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator13.2.sdk/usr/lib/swift/CoreGraphics.swiftmodule/x86_64.swiftinterface"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator13.2.sdk/usr/lib/swift/Swift.swiftmodule/x86_64.swiftinterface"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator13.2.sdk/usr/lib/swift/UIKit.swiftmodule/x86_64.swiftinterface"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator13.2.sdk/usr/lib/swift/SwiftOnoneSupport.swiftmodule/x86_64.swiftinterface"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator13.2.sdk/System/Library/Frameworks/Combine.framework/Modules/Combine.swiftmodule/x86_64-apple-ios-simulator.swiftinterface"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/ObjectiveC.swiftmodule/x86_64.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/CoreImage.swiftmodule/x86_64.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/QuartzCore.swiftmodule/x86_64.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/Dispatch.swiftmodule/x86_64.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/Metal.swiftmodule/x86_64.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/Darwin.swiftmodule/x86_64.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/Foundation.swiftmodule/x86_64.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/CoreFoundation.swiftmodule/x86_64.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/CoreGraphics.swiftmodule/x86_64.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/Swift.swiftmodule/x86_64.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/UIKit.swiftmodule/x86_64.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/SwiftOnoneSupport.swiftmodule/x86_64.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/Combine.swiftmodule/x86_64-apple-ios-simulator.swiftmodule"
+- "/Users/dkozyr/Desktop/companion/Build/DerivedData/Products/Debug-iphonesimulator/Alamofire/Alamofire.framework/Modules/Alamofire.swiftmodule/x86_64-apple-ios-simulator.swiftmodule"
+- "/Users/dkozyr/Desktop/companion/Build/DerivedData/Products/Debug-iphonesimulator/BrightFutures/BrightFutures.framework/Modules/BrightFutures.swiftmodule/x86_64-apple-ios-simulator.swiftmodule"
+- "/Users/dkozyr/Desktop/companion/Build/DerivedData/Products/Debug-iphonesimulator/Alamofire/Alamofire.framework/Headers/Alamofire-umbrella.h"
+- "/Users/dkozyr/Desktop/companion/Build/DerivedData/Products/Debug-iphonesimulator/BrightFutures/BrightFutures.framework/Headers/BrightFutures-umbrella.h"
+- "/Users/dkozyr/Desktop/companion/Build/DerivedData/Products/Debug-iphonesimulator/Alamofire/Alamofire.framework/Headers/Alamofire-Swift.h"
+- "/Users/dkozyr/Desktop/companion/Build/DerivedData/Products/Debug-iphonesimulator/BrightFutures/BrightFutures.framework/Headers/BrightFutures-Swift.h"
+- "/Users/dkozyr/Desktop/companion/Build/DerivedData/Products/Debug-iphonesimulator/Alamofire/Alamofire.framework/Modules/module.modulemap"
+- "/Users/dkozyr/Desktop/companion/Build/DerivedData/Products/Debug-iphonesimulator/BrightFutures/BrightFutures.framework/Modules/module.modulemap"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator13.2.sdk/usr/include/objc/ObjectiveC.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator13.2.sdk/System/Library/Frameworks/OpenGLES.framework/Headers/OpenGLES.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator13.2.sdk/System/Library/Frameworks/CoreImage.framework/Headers/CoreImage.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator13.2.sdk/System/Library/Frameworks/QuartzCore.framework/Headers/QuartzCore.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/apinotes/Dispatch.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator13.2.sdk/System/Library/Frameworks/Metal.framework/Headers/Metal.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator13.2.sdk/usr/include/Darwin.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator13.2.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator13.2.sdk/System/Library/Frameworks/CoreGraphics.framework/Headers/CoreGraphics.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator13.2.sdk/System/Library/Frameworks/UserNotifications.framework/Headers/UserNotifications.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator13.2.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIKit.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator13.2.sdk/System/Library/Frameworks/CoreText.framework/Headers/CoreText.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator13.2.sdk/System/Library/Frameworks/Security.framework/Headers/Security.apinotes"
+interface-hash: "cef3a9863b6bd749e094f38d8ac4945b"

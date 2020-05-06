@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>logFormatVersion</key>
+	<integer>10</integer>
+	<key>logs</key>
+	<dict>
+		<key>145AEB4E-FA27-4551-A368-53EA649C6395</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>145AEB4E-FA27-4551-A368-53EA649C6395.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>E</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>swiftCompanion project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>swiftCompanion</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build swiftCompanion</string>
+			<key>timeStartedRecording</key>
+			<real>610405188.97027802</real>
+			<key>timeStoppedRecording</key>
+			<real>610405189.248909</real>
+			<key>title</key>
+			<string>Build swiftCompanion</string>
+			<key>uniqueIdentifier</key>
+			<string>145AEB4E-FA27-4551-A368-53EA649C6395</string>
+		</dict>
+		<key>2D23E79C-E8B7-488B-ACAB-00F35F0C0940</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>2D23E79C-E8B7-488B-ACAB-00F35F0C0940.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>swiftCompanion project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>swiftCompanion</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build swiftCompanion</string>
+			<key>timeStartedRecording</key>
+			<real>610322390.76721501</real>
+			<key>timeStoppedRecording</key>
+			<real>610322392.74194705</real>
+			<key>title</key>
+			<string>Build swiftCompanion</string>
+			<key>uniqueIdentifier</key>
+			<string>2D23E79C-E8B7-488B-ACAB-00F35F0C0940</string>
+		</dict>
+		<key>520E2B5E-1D1A-4EEF-8FC6-EE0F8DE770C8</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>520E2B5E-1D1A-4EEF-8FC6-EE0F8DE770C8.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>E</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>swiftCompanion project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>swiftCompanion</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build swiftCompanion</string>
+			<key>timeStartedRecording</key>
+			<real>610405196.66939104</real>
+			<key>timeStoppedRecording</key>
+			<real>610405196.82846606</real>
+			<key>title</key>
+			<string>Build swiftCompanion</string>
+			<key>uniqueIdentifier</key>
+			<string>520E2B5E-1D1A-4EEF-8FC6-EE0F8DE770C8</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

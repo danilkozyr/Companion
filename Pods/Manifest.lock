@@ -1,20 +1,30 @@
 PODS:
-  - Alamofire (4.8.2)
-  - SwiftyJSON (5.0.0)
+  - Alamofire (5.1.0)
+  - BrightFutures (8.0.0)
+  - Realm (4.4.1):
+    - Realm/Headers (= 4.4.1)
+  - Realm/Headers (4.4.1)
+  - RealmSwift (4.4.1):
+    - Realm (= 4.4.1)
 
 DEPENDENCIES:
   - Alamofire
-  - SwiftyJSON
+  - BrightFutures
+  - RealmSwift
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  trunk:
     - Alamofire
-    - SwiftyJSON
+    - BrightFutures
+    - Realm
+    - RealmSwift
 
 SPEC CHECKSUMS:
-  Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
-  SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
+  Alamofire: 9d5c5f602928e512395b30950c5984eca840093c
+  BrightFutures: f8427b46feabaf73c5e71ace7d86d65dfbb47696
+  Realm: 4eb04d7487bd43c0581256f40b424eafb711deff
+  RealmSwift: 3eb8924ff7100df5928c7602f71d0fec51e7c9c5
 
-PODFILE CHECKSUM: cf44153a8a227f1127d7792381c3b3bd7ec4b3bf
+PODFILE CHECKSUM: 8416d48b3f4d3da55e9017f418cd3ebd851631f5
 
-COCOAPODS: 1.7.5
+COCOAPODS: 1.8.4
