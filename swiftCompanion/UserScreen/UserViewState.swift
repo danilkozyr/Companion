@@ -14,8 +14,10 @@ struct UserViewState {
     let poolDate: String
     var location: String?
     let campusPlace: String
-    let level: String
-    let levelProgress: Float
+    let poolLevel: String
+    let poolLevelProgress: Float
+    let studyLevel: String
+    let studyLevelProgress: Float
     let studyProjects: [ProjectViewState]
     let poolProjects: [ProjectViewState]
     let studySkills: [SkillViewState]

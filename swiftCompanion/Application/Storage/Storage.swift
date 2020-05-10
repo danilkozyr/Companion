@@ -30,4 +30,19 @@ class Storage {
             return []
         }
     }
+
+    func deleteObject<T: Object>(type: T.Type, with id: Int) {
+        
+        do {
+            let realm = try Realm()
+            let result = realm.objects(Friend.self).filter("id == \(id)")
+
+            try realm.write {
+                realm.delete(result)
+            }
+
+        } catch {
+            print("error deleting")
+        }
+    }
 }

@@ -27,6 +27,11 @@ class FriendsViewController: BaseViewController {
         presenter.setDelegate(self)
         presenter.load()
     }
+
+    override func viewWillAppear(_ animated: Bool) {
+        presenter.load()
+        tableView.reloadData()
+    }
 }
 
 // MARK: FriendsPresenterDelegate
@@ -41,6 +46,8 @@ extension FriendsViewController: FriendsPresenterDelegate {
     }
 
     func showError(with message: String) {
+        dismiss(animated: false, completion: nil)
+
         let alert = UIAlertController().create(title: Constants.Titles.error,
                                                message: message,
                                                action: Constants.Labels.ok)

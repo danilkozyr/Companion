@@ -27,7 +27,7 @@ class ProfileCell: UITableViewCell {
 
     // MARK: Configuration
     
-    func configureCell(user: UserViewState) {
+    func configureCell(user: UserViewState, isMainProfile: Bool) {
         backgroundColor = .clear
         profileImage.image = user.image
         fullName.text = user.fullName
@@ -37,7 +37,8 @@ class ProfileCell: UITableViewCell {
         corrections.text = Constants.Labels.corrections + user.corrections
         pool.text = user.poolDate
         place.text = user.location
-        level.text = Constants.Labels.level + user.level
-        levelProgress.progress = user.levelProgress
+        let lvl = isMainProfile ? user.studyLevel : user.poolLevel
+        level.text = Constants.Labels.level + lvl
+        levelProgress.progress = isMainProfile ? user.studyLevelProgress : user.poolLevelProgress
     }
 }

@@ -1,7 +1,6 @@
 import UIKit
 
 // MARK: TODO: Create ProfileView, SectionView, ProjectView
-// MARK: TODO: Switcher for 42 vs pool projects
 
 class UserViewController: BaseViewController {
 
@@ -30,6 +29,8 @@ class UserViewController: BaseViewController {
     // MARK: Private properties
 
     private let presenter = UserPresenter()
+    private var showMainProfile = true
+    private var isFriend = false
 
     // MARK: Internal properties and methods
 
@@ -45,8 +46,18 @@ class UserViewController: BaseViewController {
 
     // MARK: Private methods
 
-    @objc private func handleAddBarButtonItem() {
-        presenter.addToFriends(viewState)
+    @objc private func handleFriendsBarButtonItem() {
+        if isFriend {
+            presenter.deleteFromFriends(viewState)
+        } else {
+            presenter.addToFriends(viewState)
+        }
+    }
+
+    @objc private func handleProjectShuffle() {
+        showMainProfile.toggle()
+        handleBarButtonItems(isFriend: isFriend)
+        tableView.reloadData()
     }
 }
 
@@ -63,17 +74,27 @@ extension UserViewController: UserPresenterDelegate {
         tableView.reloadData()
     }
 
-    func addBarButtonItem() {
-        let barButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(handleAddBarButtonItem))
-        navigationItem.rightBarButtonItem = barButtonItem
+    func handleBarButtonItems(isFriend: Bool) {
+        self.isFriend = isFriend
+
+        let friendBarButtonItem = UIBarButtonItem(title: isFriend ? "U" : "F",
+                                                  style: .plain,
+                                                  target: self,
+                                                  action: #selector(handleFriendsBarButtonItem))
+
+        let mainProfileSwitchBarButtonItem = UIBarButtonItem(title: showMainProfile ? "Piscine" : "42",
+                                                             style: .plain,
+                                                             target: self,
+                                                             action: #selector(handleProjectShuffle))
+        navigationItem.rightBarButtonItems = [friendBarButtonItem, mainProfileSwitchBarButtonItem]
     }
 
-    func hideBarButtonItem() {
-        navigationItem.rightBarButtonItem = nil
-    }
 
-    func showError(_ error: String) {
-        print(error)
+    func showError(_ message: String) {
+        let alert = UIAlertController().create(title: Constants.Titles.error,
+                                               message: message,
+                                               action: Constants.Labels.ok)
+        present(alert, animated: true)
     }
 }
 
@@ -88,28 +109,29 @@ extension UserViewController: UITableViewDataSource {
         if section == 0 {
             return 1
         } else if section == 1 {
-            return viewState.studyProjects.isEmpty ? 0 : viewState.studyProjects.count + 1
+            return showMainProfile ? viewState.studyProjects.count : viewState.poolProjects.count
         } else {
-            return viewState.studySkills.isEmpty ? 0 : viewState.studySkills.count + 1
+            return showMainProfile ? viewState.studySkills.count : viewState.poolSkills.count
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifier.profile) as! ProfileCell
-            cell.configureCell(user: viewState)
-
+            cell.configureCell(user: viewState, isMainProfile: showMainProfile)
             return cell
         } else if indexPath.section == 1 {
             if indexPath.row == 0 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifier.section) as! SectionCell
                 cell.configure(with: Constants.SectionNames.projects)
-
                 return cell
             }
+
             let cell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifier.project) as! ProjectCell
-            let projectUser = viewState.studyProjects[indexPath.row - 1]
-            cell.configureCell(with: projectUser)
+            let projects = showMainProfile ? viewState.studyProjects : viewState.poolProjects
+            let project = projects[indexPath.row - 1]
+
+            cell.configureCell(with: project)
             
             return cell
         } else {
@@ -119,10 +141,12 @@ extension UserViewController: UITableViewDataSource {
 
                 return cell
             }
+
             let cell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifier.skill) as! SkillCell
-            let skill = viewState.studySkills[indexPath.row - 1]
+            let skills = showMainProfile ? viewState.studySkills : viewState.poolSkills
+            let skill = skills[indexPath.row - 1]
+
             cell.configureCell(with: skill)
-        
             return cell
         }
     }

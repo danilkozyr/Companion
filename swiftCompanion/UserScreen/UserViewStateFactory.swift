@@ -12,20 +12,16 @@ class UserViewStateFactory {
     func make(from response: UserResponse) -> UserViewState {
         let fullName = response.firstName + " " + response.lastName
         let poolDate = "\(response.poolMonth), \(response.poolYear)"
-        let levelFloat: Float
 
-        if let level = response.cursusUsers.filter( { $0.cursusId == 1 } ).first?.level {
-            levelFloat = level
-        } else if let level = response.cursusUsers.filter( { $0.cursusId == 4 } ).first?.level {
-            levelFloat = level
-        } else {
-            levelFloat = 0.0
-        }
+        let studyLevelFloat = response.cursusUsers.filter( { $0.cursusId == 1 } ).first?.level ?? 0
+        let studyLevelString = String(studyLevelFloat).split(separator: ".")
+        let studyLevel = "\(studyLevelString[0]) - \(studyLevelString[1])%"
+        let studyLevelProgress = Float("0." + studyLevelString[1]) ?? 0.0
 
-        let levelString = String(levelFloat).split(separator: ".")
-
-        let level = "\(levelString[0]) - \(levelString[1])%"
-        let levelProgress = Float("0." + levelString[1]) ?? 0.0
+        let poolLevelFloat = response.cursusUsers.filter( { $0.cursusId == 4 } ).first?.level ?? 0
+        let poolLevelString = String(poolLevelFloat).split(separator: ".")
+        let poolLevel = "\(poolLevelString[0]) - \(poolLevelString[1])%"
+        let poolLevelProgress = Float("0." + poolLevelString[1]) ?? 0.0
 
         let campusPlace: String
 
@@ -52,8 +48,10 @@ class UserViewStateFactory {
                              poolDate: poolDate,
                              location: response.location,
                              campusPlace: campusPlace,
-                             level: level,
-                             levelProgress: levelProgress,
+                             poolLevel: poolLevel,
+                             poolLevelProgress: poolLevelProgress,
+                             studyLevel: studyLevel,
+                             studyLevelProgress: studyLevelProgress,
                              studyProjects: studyProjects,
                              poolProjects: poolProjects,
                              studySkills: studySkills,

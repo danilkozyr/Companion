@@ -4,9 +4,8 @@ import UIKit
 protocol UserPresenterDelegate {
     func showLastLocation(_ location: String?)
     func showProfileImage(_ image: UIImage)
-    func addBarButtonItem()
-    func hideBarButtonItem()
-    func showError(_ error: String)
+    func handleBarButtonItems(isFriend: Bool)
+    func showError(_ message: String)
 }
 
 class UserPresenter {
@@ -14,6 +13,7 @@ class UserPresenter {
     // MARK: Private properties
 
     private var delegate: UserPresenterDelegate?
+    private let storage = Storage()
 
     // MARK: Internal methods
 
@@ -24,13 +24,14 @@ class UserPresenter {
     func load(for user: UserViewState) {
         downloadLastLocation(for: user)
         downloadProfileImage(for: user)
-        if !checkIfFriendIsAlreadyAdded(with: user.id) {
-            delegate?.addBarButtonItem()
-        }
+        let isFriend = checkIfFriendIsAlreadyAdded(with: user.id)
+        delegate?.handleBarButtonItems(isFriend: isFriend)
     }
 
     func addToFriends(_ viewState: UserViewState) {
-        guard !checkIfFriendIsAlreadyAdded(with: viewState.id) else {
+        let isFriend = checkIfFriendIsAlreadyAdded(with: viewState.id)
+
+        guard !isFriend else {
             return
         }
 
@@ -38,23 +39,26 @@ class UserPresenter {
         friend.id = viewState.id
         friend.name = viewState.fullName
         friend.email = viewState.email
-        friend.level = viewState.level
-        friend.levelProgress = viewState.levelProgress
+        friend.level = viewState.studyLevel
+        friend.levelProgress = viewState.studyLevelProgress
         friend.image = viewState.image?.pngData()
 
         if let url = viewState.imageURL {
             friend.imageURL = String(describing: url)
         }
 
-        let storage = Storage()
         storage.saveObject(friend)
-        delegate?.hideBarButtonItem()
+        delegate?.handleBarButtonItems(isFriend: true)
+    }
+
+    func deleteFromFriends(_ viewState: UserViewState) {
+        storage.deleteObject(type: Friend.self, with: viewState.id)
+        delegate?.handleBarButtonItems(isFriend: false)
     }
 
     // MARK: Private methods
 
     private func checkIfFriendIsAlreadyAdded(with id: Int) -> Bool {
-        let storage = Storage()
         let objects: [Friend] = storage.readObject()
         let savedFriend = objects.first(where: { $0.id == id })
 
