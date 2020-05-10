@@ -1,12 +1,14 @@
 import UIKit
 
 class ProjectCell: UITableViewCell {
-    
+
+    // MARK: IBOutlets
+
     @IBOutlet private weak var projectName: UILabel!
     @IBOutlet private weak var projectGrade: UILabel!
-    
-    static let identifier = "projectCell"
-    
+
+    // MARK: Configuration
+
     func configureCell(with viewState: ProjectViewState) {
         projectName.text = viewState.name        
         projectGrade.text = viewState.grade

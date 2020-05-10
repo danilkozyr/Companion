@@ -7,6 +7,8 @@ class UserViewStateFactory {
         case study
     }
 
+    // MARK: Internal methods
+
     func make(from response: UserResponse) -> UserViewState {
         let fullName = response.firstName + " " + response.lastName
         let poolDate = "\(response.poolMonth), \(response.poolYear)"
@@ -30,7 +32,7 @@ class UserViewStateFactory {
         if let campus = response.campus.first {
             campusPlace = campus.city + ", " + campus.country
         } else {
-            campusPlace = "Sillicon Valley"
+            campusPlace = Constants.Labels.defaultUsersPlace
         }
 
         let poolProjects = makeProjects(from: response, course: .pool)
@@ -57,6 +59,8 @@ class UserViewStateFactory {
                              studySkills: studySkills,
                              poolSkills: poolSkills)
     }
+
+    // MARK: Private methods
 
     private func makeSkills(from user: UserResponse, course: CourseType) -> [SkillViewState] {
         let cursus: CursusUsers?
@@ -91,7 +95,7 @@ class UserViewStateFactory {
         case .pool:
             projects = user.projectsUsers.filter { $0.cursusIds.contains(4) && $0.project.parentId == nil }
         case .study:
-            projects = user.projectsUsers.filter( { $0.cursusIds.contains(1) && $0.project.parentId == nil && $0.project.name != "Rushes" } )
+            projects = user.projectsUsers.filter( { $0.cursusIds.contains(1) && $0.project.parentId == nil && $0.project.name !=  Constants.Labels.rushes } )
         }
 
         var viewStates: [ProjectViewState] = []
@@ -101,7 +105,7 @@ class UserViewStateFactory {
                 return
             }
 
-            let color = self.getProjectColor(project: project)
+            let color = self.getProjectColor(project: project, course: course)
             let grade: String
 
             if let finalMark = project.finalMark {
@@ -117,11 +121,13 @@ class UserViewStateFactory {
         return viewStates.sorted(by: { $0.name < $1.name })
     }
 
-    private func getProjectColor(project: ProjectUsers) -> UIColor {
+    private func getProjectColor(project: ProjectUsers, course: CourseType) -> UIColor {
+        let minToPassGrade = course == .pool ? 25 : 75
+
         guard let grade = project.finalMark else {
             return .white
         }
 
-        return grade >= 75 ? .customGreen : .customRed
+        return grade >= minToPassGrade ? .customGreen : .customRed
     }
 }

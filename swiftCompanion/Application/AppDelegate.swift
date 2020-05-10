@@ -1,11 +1,3 @@
-//
-//  AppDelegate.swift
-//  swiftCompanion
-//
-//  Created by Daniil KOZYR on 7/14/19.
-//  Copyright © 2019 Daniil KOZYR. All rights reserved.
-//
-
 import UIKit
 
 @UIApplicationMain

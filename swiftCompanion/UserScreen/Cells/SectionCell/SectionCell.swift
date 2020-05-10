@@ -2,8 +2,13 @@ import UIKit
 
 class SectionCell: UITableViewCell {
 
-    @IBOutlet weak var sectionName: UILabel!
+    // MARK: IBOutlets
 
-    static let identifier = "sectionCell"
-    
+    @IBOutlet private weak var sectionName: UILabel!
+
+    // MARK: Configuration
+
+    func configure(with name: String) {
+        sectionName.text = name
+    }
 }

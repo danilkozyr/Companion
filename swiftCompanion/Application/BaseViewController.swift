@@ -1,7 +1,6 @@
 import UIKit
 
 class BaseViewController: UIViewController {
-
     override func viewDidLoad() {
         view.setGradientColor(colorOne: .customDark,
                               colorTwo: .customPurple,
