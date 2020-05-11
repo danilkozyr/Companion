@@ -1,0 +1,41 @@
+PODS:
+  - Alamofire (5.1.0)
+  - AppCenter (3.1.1):
+    - AppCenter/Analytics (= 3.1.1)
+    - AppCenter/Crashes (= 3.1.1)
+  - AppCenter/Analytics (3.1.1):
+    - AppCenter/Core
+  - AppCenter/Core (3.1.1)
+  - AppCenter/Crashes (3.1.1):
+    - AppCenter/Core
+  - BrightFutures (8.0.0)
+  - Realm (4.4.1):
+    - Realm/Headers (= 4.4.1)
+  - Realm/Headers (4.4.1)
+  - RealmSwift (4.4.1):
+    - Realm (= 4.4.1)
+
+DEPENDENCIES:
+  - Alamofire
+  - AppCenter
+  - BrightFutures
+  - RealmSwift
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - AppCenter
+    - BrightFutures
+    - Realm
+    - RealmSwift
+
+SPEC CHECKSUMS:
+  Alamofire: 9d5c5f602928e512395b30950c5984eca840093c
+  AppCenter: 513d32888854d67d8cfbd3a8db16aeb5fb2e2a75
+  BrightFutures: f8427b46feabaf73c5e71ace7d86d65dfbb47696
+  Realm: 4eb04d7487bd43c0581256f40b424eafb711deff
+  RealmSwift: 3eb8924ff7100df5928c7602f71d0fec51e7c9c5
+
+PODFILE CHECKSUM: 73698ac394d003a1b46ab510c8ff81a18390dd50
+
+COCOAPODS: 1.9.1
