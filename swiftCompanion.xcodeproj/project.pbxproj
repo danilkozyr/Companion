@@ -255,10 +255,10 @@
 			isa = PBXGroup;
 			children = (
 				55B177562460B6FA008A4B24 /* Application */,
-				55B177532460B5EB008A4B24 /* MainScreen */,
-				55B177542460B60A008A4B24 /* UserScreen */,
 				5527F4CE246347BB001F7F21 /* FriendsScreen */,
 				557E71BB2468707400ADE834 /* LoadingScreen */,
+				55B177532460B5EB008A4B24 /* MainScreen */,
+				55B177542460B60A008A4B24 /* UserScreen */,
 				55D87EED22DB3BE90035F60F /* Info.plist */,
 			);
 			path = swiftCompanion;

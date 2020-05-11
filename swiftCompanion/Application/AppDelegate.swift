@@ -1,4 +1,7 @@
 import UIKit
+import AppCenter
+import AppCenterAnalytics
+import AppCenterCrashes
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -13,6 +16,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().isTranslucent = true
         UINavigationBar.appearance().tintColor = .white
         UINavigationBar.appearance().backgroundColor = .clear
+
+        MSAppCenter.start("7d39c6c5-2a56-4d04-962a-189ea2e95d75", withServices:[
+          MSAnalytics.self,
+          MSCrashes.self
+        ])
+
         return true
     }
 

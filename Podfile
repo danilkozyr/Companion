@@ -9,5 +9,6 @@ target 'swiftCompanion' do
 pod 'Alamofire'
 pod 'BrightFutures'
 pod 'RealmSwift'
+pod 'AppCenter'
 
 end
